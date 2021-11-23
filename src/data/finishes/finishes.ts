@@ -20,3 +20,7 @@ export const surfaces = Object.freeze([
 ] as const)
 
 export type Surface = typeof surfaces[number]
+
+export const packageTypes = Object.freeze([5, 10, 20] as const)
+
+export type PackageType = typeof packageTypes[number]
