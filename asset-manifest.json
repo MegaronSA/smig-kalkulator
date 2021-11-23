@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/smig-kalkulator/static/css/main.d2882399.chunk.css",
-    "main.js": "/smig-kalkulator/static/js/main.eb7ab1a3.chunk.js",
-    "main.js.map": "/smig-kalkulator/static/js/main.eb7ab1a3.chunk.js.map",
+    "main.js": "/smig-kalkulator/static/js/main.9ba5c3df.chunk.js",
+    "main.js.map": "/smig-kalkulator/static/js/main.9ba5c3df.chunk.js.map",
     "runtime-main.js": "/smig-kalkulator/static/js/runtime-main.9d55214f.js",
     "runtime-main.js.map": "/smig-kalkulator/static/js/runtime-main.9d55214f.js.map",
     "static/js/2.7621ef7e.chunk.js": "/smig-kalkulator/static/js/2.7621ef7e.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.9d55214f.js",
     "static/js/2.7621ef7e.chunk.js",
     "static/css/main.d2882399.chunk.css",
-    "static/js/main.eb7ab1a3.chunk.js"
+    "static/js/main.9ba5c3df.chunk.js"
   ]
 }
