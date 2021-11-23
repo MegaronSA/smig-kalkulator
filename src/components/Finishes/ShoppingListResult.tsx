@@ -5,6 +5,8 @@ interface Props {
   priceSum: number
 }
 
+const imgUrl = `${process.env.PUBLIC_URL}/smig_thinking.png`
+
 export const ShoppingListResult: React.FC<Props> = ({
   packagesToBuy,
   priceSum,
@@ -12,7 +14,7 @@ export const ShoppingListResult: React.FC<Props> = ({
   return (
     <section className="w-full flex flex-row">
       <aside className="w-2/5 relative -left-4">
-        <img src="/smig_thinking.png" alt="rezultat_img" />
+        <img src={imgUrl} alt="lista_img" />
       </aside>
       <div className="w-3/5">
         <h5 className="text-gray-700 text-lg font-bold">Lista zakupów:</h5>

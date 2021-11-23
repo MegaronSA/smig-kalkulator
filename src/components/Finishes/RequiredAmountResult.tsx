@@ -4,6 +4,8 @@ interface Props {
   result: number
 }
 
+const imgUrl = `${process.env.PUBLIC_URL}/smig_presents.png`
+
 export const RequiredAmountResult: React.FC<Props> = ({ result }) => {
   return (
     <section className="w-full flex flex-row">
@@ -14,7 +16,7 @@ export const RequiredAmountResult: React.FC<Props> = ({ result }) => {
         </h2>
       </div>
       <aside className="w-1/2 relative -right-4">
-        <img src="/smig_presents.png" alt="rezultat_img" />
+        <img src={imgUrl} alt="rezultat_img" />
       </aside>
     </section>
   )
