@@ -9,6 +9,6 @@ export const adhesives = Object.freeze({
 
 export type Adhesive = keyof typeof adhesives
 
-export const trowelSizes = Object.freeze([4, 6, 8, 10, 12] as const)
+export const trowelSizes = Object.freeze(['4', '6', '8', '10', '12'] as const)
 
 export type TrowelSize = typeof trowelSizes[number]
