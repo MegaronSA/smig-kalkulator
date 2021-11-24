@@ -14,8 +14,8 @@ export const Finishes: React.FC<Props> = () => {
   console.log('ptb', packagesToBuy)
   console.log('ps', priceSum)
   return (
-    <div className="container mx-auto max-w-lg">
-      <div className="px-8 py-6">
+    <div className="container mx-auto max-w-lg overflow-x-hidden">
+      <div className="px-8 py-6 z-10 bg-white relative">
         <h5 className="font-semibold text-gray-400 text-sm">
           1. Zużycie gładzi
         </h5>
@@ -23,7 +23,7 @@ export const Finishes: React.FC<Props> = () => {
         {result && <RequiredAmountResult result={result} />}
       </div>
       {result && (
-        <div className="px-8 py-6">
+        <div className="px-8 py-6 animate-slideFromTop z-0 relative">
           <h5 className="font-semibold text-gray-400 text-sm">2. Zakupy</h5>
           <ShoppingListForm
             result={result}
