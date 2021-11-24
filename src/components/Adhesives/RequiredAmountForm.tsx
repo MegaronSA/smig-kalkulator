@@ -2,7 +2,6 @@
 import { AdornedInput } from 'components/shared'
 import {
   Adhesive,
-  AdhesiveOption,
   adhesives,
   getAdhesiveEfficiency,
   TileSize,
@@ -22,18 +21,20 @@ const initialProduct: Adhesive = 'S-3'
 export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
   const [product, setProduct] = useState<Adhesive>(initialProduct)
   const [area, setArea] = useState<string>('')
-  const [option, setOption] = useState<AdhesiveOption>()
+  const [trowelSize, setTrowelSize] = useState<TrowelSize>('4')
 
   const parsedArea = parseFloat(area)
   const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea)
 
+  console.log(trowelSize)
+
   useEffect(() => {
-    const isValid = product && isAreaValid && option
+    const isValid = product && isAreaValid && trowelSize
     if (!isValid) return setResult(undefined)
-    const efficiency = getAdhesiveEfficiency(product, option)
+    const efficiency = getAdhesiveEfficiency(product, trowelSize)
     const result = parsedArea / efficiency
     setResult(result)
-  }, [product, area, option])
+  }, [product, area, trowelSize])
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -59,21 +60,35 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
           onChange={(e) => setArea(e.target.value)}
         />
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-end">
         <div>
-          <h6 className="input-label">Rozmiar pacy zębatej (mm):</h6>
-          <div className="flex flex-col gap-1 mt-1">
-            {getTrowelSizesOptions(option, setOption)}
-          </div>
+          <label className="input-label" htmlFor="trowelSize">
+            Rozmiar pacy zębatej (mm):
+          </label>
+          <select
+            name="trowelSize"
+            className="mt-1 block w-full input"
+            value={trowelSize}
+            onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
+          >
+            {getTrowelSizesOptions()}
+          </select>
+        </div>
+        <div className="py-3">
+          <span className=" text-gray-500 font-medium">lub</span>
         </div>
         <div>
-          <p className="font-semibold text-gray-600">lub</p>
-        </div>
-        <div>
-          <h6 className="input-label">Format płytki:</h6>
-          <div className="flex flex-col gap-1 mt-1">
-            {getTileSizeOptions(option, setOption)}
-          </div>
+          <label className="input-label" htmlFor="tileSize">
+            Format płytki (cm):
+          </label>
+          <select
+            name="tileSize"
+            className="mt-1 block w-full input"
+            value={trowelSize}
+            onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
+          >
+            {getTileSizeOptions()}
+          </select>
         </div>
       </div>
     </section>
@@ -85,36 +100,19 @@ const getProductOptions = () =>
     <option key={adhesive}>{adhesive}</option>
   ))
 
-const getTrowelSizesOptions = (
-  selectedTrowelSize: AdhesiveOption | undefined,
-  onChange: (trowelSize: TrowelSize) => void,
-) =>
+const getTrowelSizesOptions = () =>
   trowelSizes.map((trowelSize) => (
-    <div className="flex flex-row gap-4 items-center" key={trowelSize}>
-      <input
-        type="radio"
-        name="surfaces"
-        value={trowelSize}
-        checked={selectedTrowelSize === trowelSize}
-        onChange={(e) => onChange(e.target.value as TrowelSize)}
-      />
-      <label htmlFor={trowelSize}>{trowelSize}</label>
-    </div>
+    <option key={trowelSize}>{trowelSize}</option>
   ))
 
-const getTileSizeOptions = (
-  selectedTrowelSize: AdhesiveOption | undefined,
-  onChange: (trowelSize: TileSize) => void,
-) =>
+const getTileSizeOptions = () =>
   tileSizes.map((tileSize) => (
-    <div className="flex flex-row gap-4 items-center" key={tileSize}>
-      <input
-        type="radio"
-        name="surfaces"
-        value={tileSize}
-        checked={selectedTrowelSize === tileSize}
-        onChange={(e) => onChange(e.target.value as TileSize)}
-      />
-      <label htmlFor={tileSize}>{tileSize}</label>
-    </div>
+    <option key={tileSize} value={tileSizeToTrowelSize(tileSize)}>
+      {tileSize}
+    </option>
   ))
+
+const tileSizeToTrowelSize = (tileSize: TileSize): TrowelSize => {
+  const tileIdx = tileSizes.indexOf(tileSize)
+  return trowelSizes[tileIdx]
+}

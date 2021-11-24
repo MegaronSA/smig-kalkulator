@@ -41,7 +41,7 @@ export const ShoppingListForm: React.FC<Props> = ({
     <section className="my-6 flex flex-col gap-6">
       <div>
         <h6 className="input-label">Opakowanie:</h6>
-        <div className="flex flex-col gap-1 mt-1">
+        <div className="flex flex-row gap-4 mt-1">
           {getPackagingOptions(packageType, setPackageType)}
         </div>
       </div>
@@ -62,15 +62,15 @@ const getPackagingOptions = (
   selectedPackageType: PackageType,
   onChange: (packageType: PackageType) => void,
 ) =>
-  packageTypes.map((packageType) => (
-    <div className="flex flex-row gap-4 items-center" key={`${packageType}kg`}>
-      <input
-        type="radio"
-        name="packaging"
-        value={packageType}
-        checked={selectedPackageType === packageType}
-        onChange={(e) => onChange(parseInt(e.target.value) as PackageType)}
-      />
-      <label htmlFor={`${packageType}kg`}>{`${packageType} kg`}</label>
-    </div>
-  ))
+  packageTypes.map((packageType) => {
+    const isSelected = selectedPackageType === packageType
+    const selectedStyles = isSelected
+      ? 'bg-blue-600 text-white border-0'
+      : 'border'
+    return (
+      <div
+        className={`px-4 py-2 input cursor-pointer ${selectedStyles}`}
+        onClick={() => onChange(packageType)}
+      >{`${packageType} kg`}</div>
+    )
+  })

@@ -20,7 +20,3 @@ export const tileSizes = Object.freeze([
 
 export type TrowelSize = typeof trowelSizes[number]
 export type TileSize = typeof tileSizes[number]
-export type AdhesiveOption = TrowelSize | TileSize
-
-export const isTrowelSize = (option: AdhesiveOption): option is TrowelSize =>
-  trowelSizes.includes(option as TrowelSize)
