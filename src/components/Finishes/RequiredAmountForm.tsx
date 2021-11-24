@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AdornedInput } from 'components/shared'
 import {
   Finish,
   Surface,
@@ -20,10 +21,12 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
   const [area, setArea] = useState<string>('')
   const [surface, setSurface] = useState<Surface>()
 
+  const parsedArea = parseFloat(area)
+  const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea)
+
   useEffect(() => {
-    const parsedArea = parseFloat(area)
-    if (!product || !_.isNumber(parsedArea) || _.isNaN(parsedArea) || !surface)
-      return setResult(undefined)
+    const isValid = product && isAreaValid && surface
+    if (!isValid) return setResult(undefined)
     const efficiency = getFinishEfficiency(product, surface)
     const result = parsedArea / efficiency
     setResult(result)
@@ -46,9 +49,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
       </div>
       <div>
         <label className="input-label">Powierzchnia:</label>
-        <input
+        <AdornedInput
+          adornmentContent="m²"
           className="mt-1 block w-full input"
-          type="text"
           value={area}
           onChange={(e) => setArea(e.target.value)}
         />

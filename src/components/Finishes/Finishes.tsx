@@ -11,8 +11,6 @@ export const Finishes: React.FC<Props> = () => {
   const [packagesToBuy, setPackagesToBuy] = useState<number>()
   const [priceSum, setPriceSum] = useState<number>()
 
-  console.log('ptb', packagesToBuy)
-  console.log('ps', priceSum)
   return (
     <div className="container mx-auto max-w-lg overflow-x-hidden">
       <div className="px-8 py-6 z-10 bg-white relative">

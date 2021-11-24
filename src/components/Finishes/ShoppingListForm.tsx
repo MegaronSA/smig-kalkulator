@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AdornedInput } from 'components/shared'
 import { PackageType, packageTypes } from 'data/finishes'
 import _ from 'lodash'
 import React, { useEffect, useState } from 'react'
@@ -23,8 +24,6 @@ export const ShoppingListForm: React.FC<Props> = ({
   )
   const [pricePerPackage, setPricePerPackage] = useState<string>('')
 
-  console.log('type', packageType)
-
   useEffect(() => {
     if (!packageType) return setPackagesToBuy(undefined)
     const ceiled = Math.ceil(result / packageType)
@@ -48,9 +47,10 @@ export const ShoppingListForm: React.FC<Props> = ({
       </div>
       <div>
         <label className="input-label">Cena za opakowanie:</label>
-        <input
+        <input />
+        <AdornedInput
+          adornmentContent="zł"
           className="mt-1 block w-full input"
-          type="text"
           value={pricePerPackage}
           onChange={(e) => setPricePerPackage(e.target.value)}
         />
