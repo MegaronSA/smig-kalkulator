@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/smig-kalkulator/static/css/main.d2882399.chunk.css",
-    "main.js": "/smig-kalkulator/static/js/main.9ba5c3df.chunk.js",
-    "main.js.map": "/smig-kalkulator/static/js/main.9ba5c3df.chunk.js.map",
+    "main.css": "/smig-kalkulator/static/css/main.7f04914f.chunk.css",
+    "main.js": "/smig-kalkulator/static/js/main.ec8c70df.chunk.js",
+    "main.js.map": "/smig-kalkulator/static/js/main.ec8c70df.chunk.js.map",
     "runtime-main.js": "/smig-kalkulator/static/js/runtime-main.9d55214f.js",
     "runtime-main.js.map": "/smig-kalkulator/static/js/runtime-main.9d55214f.js.map",
-    "static/js/2.7621ef7e.chunk.js": "/smig-kalkulator/static/js/2.7621ef7e.chunk.js",
-    "static/js/2.7621ef7e.chunk.js.map": "/smig-kalkulator/static/js/2.7621ef7e.chunk.js.map",
+    "static/js/2.410ce295.chunk.js": "/smig-kalkulator/static/js/2.410ce295.chunk.js",
+    "static/js/2.410ce295.chunk.js.map": "/smig-kalkulator/static/js/2.410ce295.chunk.js.map",
     "static/js/3.b33014dc.chunk.js": "/smig-kalkulator/static/js/3.b33014dc.chunk.js",
     "static/js/3.b33014dc.chunk.js.map": "/smig-kalkulator/static/js/3.b33014dc.chunk.js.map",
     "index.html": "/smig-kalkulator/index.html",
-    "static/css/main.d2882399.chunk.css.map": "/smig-kalkulator/static/css/main.d2882399.chunk.css.map",
-    "static/js/2.7621ef7e.chunk.js.LICENSE.txt": "/smig-kalkulator/static/js/2.7621ef7e.chunk.js.LICENSE.txt"
+    "static/css/main.7f04914f.chunk.css.map": "/smig-kalkulator/static/css/main.7f04914f.chunk.css.map",
+    "static/js/2.410ce295.chunk.js.LICENSE.txt": "/smig-kalkulator/static/js/2.410ce295.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9d55214f.js",
-    "static/js/2.7621ef7e.chunk.js",
-    "static/css/main.d2882399.chunk.css",
-    "static/js/main.9ba5c3df.chunk.js"
+    "static/js/2.410ce295.chunk.js",
+    "static/css/main.7f04914f.chunk.css",
+    "static/js/main.ec8c70df.chunk.js"
   ]
 }
