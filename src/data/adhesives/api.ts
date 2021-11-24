@@ -1,9 +1,12 @@
-import { Adhesive, adhesives, TrowelSize, trowelSizes } from './adhesives'
+import { isTrowelSize, tileSizes } from '.'
+import { Adhesive, AdhesiveOption, adhesives, trowelSizes } from './adhesives'
 
 export const getAdhesiveEfficiency = (
   adhesive: Adhesive,
-  trowelSize: TrowelSize,
+  option: AdhesiveOption,
 ) => {
-  const trowelSizeIdx = trowelSizes.indexOf(trowelSize)
-  return adhesives[adhesive][trowelSizeIdx]
+  const idx = isTrowelSize(option)
+    ? trowelSizes.indexOf(option)
+    : tileSizes.indexOf(option)
+  return adhesives[adhesive][idx]
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { RequiredAmountForm } from './RequiredAmountForm'
 import { RequiredAmountResult } from './RequiredAmountResult'
-import { ShoppingListForm } from './ShoppingListForm'
-import { ShoppingListResult } from './ShoppingListResult'
+import { ShoppingListForm } from '../shared/ShoppingListForm'
+import { ShoppingListResult } from '../shared/ShoppingListResult'
 
 interface Props {}
 
@@ -29,7 +29,7 @@ export const Finishes: React.FC<Props> = () => {
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
           />
-          {packagesToBuy && priceSum && (
+          {packagesToBuy && (
             <ShoppingListResult
               packagesToBuy={packagesToBuy}
               priceSum={priceSum}

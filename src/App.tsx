@@ -8,7 +8,15 @@ const App = () => {
     <div className="font-roboto">
       <Router>
         <Routes>
-          <Route path="/" element={<Link to="/gladzie">Gladzie</Link>} />
+          <Route
+            path="/"
+            element={
+              <div className="w-full flex flex-col gap-4 text-center mt-20 text-lg font-bold">
+                <Link to="/gladzie">Gladzie</Link>
+                <Link to="/kleje">Kleje</Link>
+              </div>
+            }
+          />
           <Route path="/gladzie" element={<Finishes />} />
           <Route path="/kleje" element={<Adhesives />} />
         </Routes>

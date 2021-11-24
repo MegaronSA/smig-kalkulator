@@ -47,7 +47,6 @@ export const ShoppingListForm: React.FC<Props> = ({
       </div>
       <div>
         <label className="input-label">Cena za opakowanie:</label>
-        <input />
         <AdornedInput
           adornmentContent="zł"
           className="mt-1 block w-full input"

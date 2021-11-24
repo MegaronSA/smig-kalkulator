@@ -2,8 +2,11 @@
 import { AdornedInput } from 'components/shared'
 import {
   Adhesive,
+  AdhesiveOption,
   adhesives,
   getAdhesiveEfficiency,
+  TileSize,
+  tileSizes,
   TrowelSize,
   trowelSizes,
 } from 'data/adhesives'
@@ -19,18 +22,18 @@ const initialProduct: Adhesive = 'S-3'
 export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
   const [product, setProduct] = useState<Adhesive>(initialProduct)
   const [area, setArea] = useState<string>('')
-  const [trowelSize, setTrowelSize] = useState<TrowelSize>()
+  const [option, setOption] = useState<AdhesiveOption>()
 
   const parsedArea = parseFloat(area)
   const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea)
 
   useEffect(() => {
-    const isValid = product && isAreaValid && trowelSize
+    const isValid = product && isAreaValid && option
     if (!isValid) return setResult(undefined)
-    const efficiency = getAdhesiveEfficiency(product, trowelSize)
+    const efficiency = getAdhesiveEfficiency(product, option)
     const result = parsedArea / efficiency
     setResult(result)
-  }, [product, area, trowelSize])
+  }, [product, area, option])
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -56,10 +59,21 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
           onChange={(e) => setArea(e.target.value)}
         />
       </div>
-      <div>
-        <h6 className="input-label">Rozmiar pacy zębatej (mm):</h6>
-        <div className="flex flex-col gap-1 mt-1">
-          {getTrowelSizesOptions(trowelSize, setTrowelSize)}
+      <div className="flex justify-between items-center">
+        <div>
+          <h6 className="input-label">Rozmiar pacy zębatej (mm):</h6>
+          <div className="flex flex-col gap-1 mt-1">
+            {getTrowelSizesOptions(option, setOption)}
+          </div>
+        </div>
+        <div>
+          <p className="font-semibold text-gray-600">lub</p>
+        </div>
+        <div>
+          <h6 className="input-label">Format płytki:</h6>
+          <div className="flex flex-col gap-1 mt-1">
+            {getTileSizeOptions(option, setOption)}
+          </div>
         </div>
       </div>
     </section>
@@ -72,7 +86,7 @@ const getProductOptions = () =>
   ))
 
 const getTrowelSizesOptions = (
-  selectedTrowelSize: TrowelSize | undefined,
+  selectedTrowelSize: AdhesiveOption | undefined,
   onChange: (trowelSize: TrowelSize) => void,
 ) =>
   trowelSizes.map((trowelSize) => (
@@ -85,5 +99,22 @@ const getTrowelSizesOptions = (
         onChange={(e) => onChange(e.target.value as TrowelSize)}
       />
       <label htmlFor={trowelSize}>{trowelSize}</label>
+    </div>
+  ))
+
+const getTileSizeOptions = (
+  selectedTrowelSize: AdhesiveOption | undefined,
+  onChange: (trowelSize: TileSize) => void,
+) =>
+  tileSizes.map((tileSize) => (
+    <div className="flex flex-row gap-4 items-center" key={tileSize}>
+      <input
+        type="radio"
+        name="surfaces"
+        value={tileSize}
+        checked={selectedTrowelSize === tileSize}
+        onChange={(e) => onChange(e.target.value as TileSize)}
+      />
+      <label htmlFor={tileSize}>{tileSize}</label>
     </div>
   ))
