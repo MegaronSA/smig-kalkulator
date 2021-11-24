@@ -57,10 +57,17 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
         />
       </div>
       <div>
-        <h6 className="input-label">Rodzaj podłoża:</h6>
-        <div className="flex flex-col gap-1 mt-1">
-          {getSurfaceOptions(surface, setSurface)}
-        </div>
+        <label className="input-label" htmlFor="product">
+          Rodzaj podłoża:
+        </label>
+        <select
+          name="product"
+          className="mt-1 block w-full input"
+          value={surface}
+          onChange={(e) => setSurface(e.target.value as Surface)}
+        >
+          {getSurfaceOptions()}
+        </select>
       </div>
     </section>
   )
@@ -69,19 +76,5 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
 const getProductOptions = () =>
   Object.keys(finishes).map((finish) => <option key={finish}>{finish}</option>)
 
-const getSurfaceOptions = (
-  selectedSurface: Surface | undefined,
-  onChange: (surface: Surface) => void,
-) =>
-  surfaces.map((surface) => (
-    <div className="flex flex-row gap-4 items-center" key={surface}>
-      <input
-        type="radio"
-        name="surfaces"
-        value={surface}
-        checked={selectedSurface === surface}
-        onChange={(e) => onChange(e.target.value as Surface)}
-      />
-      <label htmlFor={surface}>{surface}</label>
-    </div>
-  ))
+const getSurfaceOptions = () =>
+  surfaces.map((surface) => <option key={surface}>{surface}</option>)

@@ -60,7 +60,7 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
           onChange={(e) => setArea(e.target.value)}
         />
       </div>
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col xs:flex-row xs:justify-between xs:items-end">
         <div>
           <label className="input-label" htmlFor="trowelSize">
             Rozmiar pacy zębatej (mm):
@@ -74,7 +74,7 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
             {getTrowelSizesOptions()}
           </select>
         </div>
-        <div className="py-3">
+        <div className="py-3 px-1">
           <span className=" text-gray-500 font-medium">lub</span>
         </div>
         <div>
