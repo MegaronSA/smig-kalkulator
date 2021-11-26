@@ -60,7 +60,7 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct
           onChange={(e) => setArea(e.target.value)}
         />
       </div>
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col xs:flex-row xs:justify-between xs:items-end">
         <div>
           <label className="input-label" htmlFor="trowelSize">
             Rozmiar pacy zębatej (mm):
@@ -70,11 +70,13 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct
             className="mt-1 block w-full input"
             value={trowelSize}
             onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
+            defaultValue={'default'}
           >
+            <option hidden disabled value={'default'} />
             {getTrowelSizesOptions()}
           </select>
         </div>
-        <div className="py-3">
+        <div className="py-3 px-1">
           <span className=" text-gray-500 font-medium">lub</span>
         </div>
         <div>
@@ -86,7 +88,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct
             className="mt-1 block w-full input"
             value={trowelSize}
             onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
+            defaultValue={'default'}
           >
+            <option hidden disabled value={'default'} />
             {getTileSizeOptions()}
           </select>
         </div>
