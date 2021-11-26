@@ -1,10 +1,14 @@
-import { TrowelSize } from '.'
-import { Adhesive, adhesives, trowelSizes } from './adhesives'
+import { TrowelSize } from ".";
+import { Adhesive, adhesives, trowelSizes } from "./adhesives";
 
 export const getAdhesiveEfficiency = (
   adhesive: Adhesive,
-  trowelSize: TrowelSize,
+  trowelSize: TrowelSize
 ) => {
-  const trowelSizeIdx = trowelSizes.indexOf(trowelSize)
-  return adhesives[adhesive][trowelSizeIdx]
-}
+  const trowelSizeIdx = trowelSizes.indexOf(trowelSize);
+  return adhesives[adhesive].efficiencies[trowelSizeIdx];
+};
+
+export const getPackageSize = (adhesive: Adhesive) => {
+  return adhesives[adhesive].packSizes;
+};

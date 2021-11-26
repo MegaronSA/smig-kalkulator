@@ -3,10 +3,14 @@ import { RequiredAmountForm } from './RequiredAmountForm'
 import { RequiredAmountResult } from './RequiredAmountResult'
 import { ShoppingListForm } from '../shared/ShoppingListForm'
 import { ShoppingListResult } from '../shared/ShoppingListResult'
+import { Finish, getPackageSize } from 'data/finishes'
 
 interface Props {}
 
 export const Finishes: React.FC<Props> = () => {
+
+  const [selectedProduct, setSelectedProduct] = useState<Finish>("A-2")
+
   const [result, setResult] = useState<number>()
   const [packagesToBuy, setPackagesToBuy] = useState<number>()
   const [priceSum, setPriceSum] = useState<number>()
@@ -17,7 +21,7 @@ export const Finishes: React.FC<Props> = () => {
         <h5 className="font-semibold text-gray-400 text-sm">
           1. Zużycie gładzi
         </h5>
-        <RequiredAmountForm setResult={setResult} />
+        <RequiredAmountForm setResult={setResult} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} />
         {result && <RequiredAmountResult result={result} />}
       </div>
       {result && (
@@ -28,6 +32,7 @@ export const Finishes: React.FC<Props> = () => {
             setPackagesToBuy={setPackagesToBuy}
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
+            packageTypes={getPackageSize(selectedProduct)}
           />
           {packagesToBuy && (
             <ShoppingListResult

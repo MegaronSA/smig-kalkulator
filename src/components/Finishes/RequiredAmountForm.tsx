@@ -11,13 +11,12 @@ import _ from 'lodash'
 import React, { useEffect, useState } from 'react'
 
 interface Props {
+  selectedProduct: Finish,
+  setSelectedProduct: (product: Finish) => void,
   setResult: (result: number | undefined) => void
 }
 
-const initialProduct: Finish = 'A-2'
-
-export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
-  const [product, setProduct] = useState<Finish>(initialProduct)
+export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct, setSelectedProduct }) => {
   const [area, setArea] = useState<string>('')
   const [surface, setSurface] = useState<Surface>()
 
@@ -25,12 +24,12 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
   const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea)
 
   useEffect(() => {
-    const isValid = product && isAreaValid && surface
+    const isValid = selectedProduct && isAreaValid && surface
     if (!isValid) return setResult(undefined)
-    const efficiency = getFinishEfficiency(product, surface)
+    const efficiency = getFinishEfficiency(selectedProduct, surface)
     const result = parsedArea / efficiency
     setResult(result)
-  }, [product, area, surface])
+  }, [selectedProduct, area, surface])
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -41,8 +40,8 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
         <select
           name="product"
           className="mt-1 block w-full input"
-          value={product}
-          onChange={(e) => setProduct(e.target.value as Finish)}
+          value={selectedProduct}
+          onChange={(e) => setSelectedProduct(e.target.value as Finish)}
         >
           {getProductOptions()}
         </select>

@@ -14,12 +14,12 @@ import React, { useEffect, useState } from 'react'
 
 interface Props {
   setResult: (result: number | undefined) => void
+  selectedProduct: Adhesive
+  setSelectedProduct: (product: Adhesive) => void
 }
 
-const initialProduct: Adhesive = 'S-3'
 
-export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
-  const [product, setProduct] = useState<Adhesive>(initialProduct)
+export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct, setSelectedProduct }) => {
   const [area, setArea] = useState<string>('')
   const [trowelSize, setTrowelSize] = useState<TrowelSize>('4')
 
@@ -29,12 +29,12 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
   console.log(trowelSize)
 
   useEffect(() => {
-    const isValid = product && isAreaValid && trowelSize
+    const isValid = selectedProduct && isAreaValid && trowelSize
     if (!isValid) return setResult(undefined)
-    const efficiency = getAdhesiveEfficiency(product, trowelSize)
+    const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize)
     const result = parsedArea / efficiency
     setResult(result)
-  }, [product, area, trowelSize])
+  }, [selectedProduct, area, trowelSize])
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -45,8 +45,8 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
         <select
           name="product"
           className="mt-1 block w-full input"
-          value={product}
-          onChange={(e) => setProduct(e.target.value as Adhesive)}
+          value={selectedProduct}
+          onChange={(e) => setSelectedProduct(e.target.value as Adhesive)}
         >
           {getProductOptions()}
         </select>

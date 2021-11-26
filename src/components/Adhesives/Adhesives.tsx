@@ -1,12 +1,16 @@
 import { RequiredAmountResult } from 'components/Finishes/RequiredAmountResult'
 import { ShoppingListForm } from 'components/shared/ShoppingListForm'
 import { ShoppingListResult } from 'components/shared/ShoppingListResult'
+import { Adhesive, getPackageSize } from 'data/adhesives'
 import React, { useState } from 'react'
 import { RequiredAmountForm } from './RequiredAmountForm'
 
 interface Props {}
 
 export const Adhesives: React.FC<Props> = (props) => {
+  const [selectedProduct, setSelectedProduct] = useState<Adhesive>("F-2")
+
+
   const [result, setResult] = useState<number>()
   const [packagesToBuy, setPackagesToBuy] = useState<number>()
   const [priceSum, setPriceSum] = useState<number>()
@@ -17,7 +21,7 @@ export const Adhesives: React.FC<Props> = (props) => {
         <h5 className="font-semibold text-gray-400 text-sm">
           1. Zużycie kleju
         </h5>
-        <RequiredAmountForm setResult={setResult} />
+        <RequiredAmountForm setResult={setResult} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}/>
         {result && <RequiredAmountResult result={result} />}
       </div>
       {result && (
@@ -28,6 +32,7 @@ export const Adhesives: React.FC<Props> = (props) => {
             setPackagesToBuy={setPackagesToBuy}
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
+            packageTypes={getPackageSize(selectedProduct)}
           />
           {packagesToBuy && (
             <ShoppingListResult
