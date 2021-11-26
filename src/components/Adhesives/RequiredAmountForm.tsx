@@ -70,7 +70,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
             className="mt-1 block w-full input"
             value={trowelSize}
             onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
+            defaultValue={'default'}
           >
+            <option hidden disabled value={'default'} />
             {getTrowelSizesOptions()}
           </select>
         </div>
@@ -86,7 +88,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
             className="mt-1 block w-full input"
             value={trowelSize}
             onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
+            defaultValue={'default'}
           >
+            <option hidden disabled value={'default'} />
             {getTileSizeOptions()}
           </select>
         </div>

@@ -43,7 +43,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
           className="mt-1 block w-full input"
           value={product}
           onChange={(e) => setProduct(e.target.value as Finish)}
+          defaultValue={'default'}
         >
+          <option hidden disabled value={'default'} />
           {getProductOptions()}
         </select>
       </div>
@@ -65,7 +67,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult }) => {
           className="mt-1 block w-full input"
           value={surface}
           onChange={(e) => setSurface(e.target.value as Surface)}
+          defaultValue={'default'}
         >
+          <option hidden disabled value={'default'} />
           {getSurfaceOptions()}
         </select>
       </div>

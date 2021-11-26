@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { RadioGroup } from '@headlessui/react'
 import { AdornedInput } from 'components/shared'
 import { PackageType, packageTypes } from 'data/finishes'
 import _ from 'lodash'
@@ -40,10 +41,14 @@ export const ShoppingListForm: React.FC<Props> = ({
   return (
     <section className="my-6 flex flex-col gap-6">
       <div>
-        <h6 className="input-label">Opakowanie:</h6>
-        <div className="flex flex-row gap-4 mt-1">
-          {getPackagingOptions(packageType, setPackageType)}
-        </div>
+        <RadioGroup value={packageType} onChange={setPackageType}>
+          <RadioGroup.Label className="input-label">
+            Opakowanie:
+          </RadioGroup.Label>
+          <div className="flex flex-row gap-4 mt-1">
+            {getPackagingOptions()}
+          </div>
+        </RadioGroup>
       </div>
       <div>
         <label className="input-label">Cena za opakowanie:</label>
@@ -58,19 +63,17 @@ export const ShoppingListForm: React.FC<Props> = ({
   )
 }
 
-const getPackagingOptions = (
-  selectedPackageType: PackageType,
-  onChange: (packageType: PackageType) => void,
-) =>
-  packageTypes.map((packageType) => {
-    const isSelected = selectedPackageType === packageType
-    const selectedStyles = isSelected
-      ? 'bg-blue-600 text-white border-0'
-      : 'border'
-    return (
-      <div
-        className={`px-4 py-2 input cursor-pointer ${selectedStyles}`}
-        onClick={() => onChange(packageType)}
-      >{`${packageType} kg`}</div>
-    )
-  })
+const getPackagingOptions = () =>
+  packageTypes.map((packageType) => (
+    <RadioGroup.Option value={packageType} key={packageType}>
+      {({ checked, active }) => (
+        <div
+          className={`px-4 py-2 input cursor-pointer focus:outline-none ${
+            checked ? 'bg-blue-600 text-white border-0' : 'border'
+          } ${active ? 'ring-2 ring-blue-400 ring-opacity-60' : ''}`}
+        >
+          {`${packageType} kg`}
+        </div>
+      )}
+    </RadioGroup.Option>
+  ))
