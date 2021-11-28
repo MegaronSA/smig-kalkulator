@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AdornedInput } from 'components/shared'
+import { AdornedInput } from "components/shared";
 import {
   Adhesive,
   adhesives,
@@ -8,33 +8,36 @@ import {
   tileSizes,
   TrowelSize,
   trowelSizes,
-} from 'data/adhesives'
-import _ from 'lodash'
-import React, { useEffect, useState } from 'react'
+} from "data/adhesives";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
 
 interface Props {
-  setResult: (result: number | undefined) => void
-  selectedProduct: Adhesive
-  setSelectedProduct: (product: Adhesive) => void
+  setResult: (result: number | undefined) => void;
+  selectedProduct: Adhesive | undefined;
+  setSelectedProduct: (product: Adhesive) => void;
 }
 
+export const RequiredAmountForm: React.FC<Props> = ({
+  setResult,
+  selectedProduct,
+  setSelectedProduct,
+}) => {
+  const [area, setArea] = useState<string>("");
+  const [trowelSize, setTrowelSize] = useState<TrowelSize>("4");
 
-export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct, setSelectedProduct }) => {
-  const [area, setArea] = useState<string>('')
-  const [trowelSize, setTrowelSize] = useState<TrowelSize>('4')
+  const parsedArea = parseFloat(area);
+  const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea);
 
-  const parsedArea = parseFloat(area)
-  const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea)
-
-  console.log(trowelSize)
+  console.log(trowelSize);
 
   useEffect(() => {
-    const isValid = selectedProduct && isAreaValid && trowelSize
-    if (!isValid) return setResult(undefined)
-    const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize)
-    const result = parsedArea / efficiency
-    setResult(result)
-  }, [selectedProduct, area, trowelSize])
+    const isValid = selectedProduct && isAreaValid && trowelSize;
+    if (!isValid) return setResult(undefined);
+    const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize);
+    const result = parsedArea / efficiency;
+    setResult(result);
+  }, [selectedProduct, area, trowelSize]);
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -45,9 +48,10 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct
         <select
           name="product"
           className="mt-1 block w-full input"
-          value={selectedProduct}
+          value={selectedProduct ?? "none"}
           onChange={(e) => setSelectedProduct(e.target.value as Adhesive)}
         >
+          <option hidden disabled value={"none"} />
           {getProductOptions()}
         </select>
       </div>
@@ -70,9 +74,9 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct
             className="mt-1 block w-full input"
             value={trowelSize}
             onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
-            defaultValue={'default'}
+            defaultValue={"default"}
           >
-            <option hidden disabled value={'default'} />
+            <option hidden disabled value={"default"} />
             {getTrowelSizesOptions()}
           </select>
         </div>
@@ -88,35 +92,35 @@ export const RequiredAmountForm: React.FC<Props> = ({ setResult, selectedProduct
             className="mt-1 block w-full input"
             value={trowelSize}
             onChange={(e) => setTrowelSize(e.target.value as TrowelSize)}
-            defaultValue={'default'}
+            defaultValue={"default"}
           >
-            <option hidden disabled value={'default'} />
+            <option hidden disabled value={"default"} />
             {getTileSizeOptions()}
           </select>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 const getProductOptions = () =>
   Object.keys(adhesives).map((adhesive) => (
     <option key={adhesive}>{adhesive}</option>
-  ))
+  ));
 
 const getTrowelSizesOptions = () =>
   trowelSizes.map((trowelSize) => (
     <option key={trowelSize}>{trowelSize}</option>
-  ))
+  ));
 
 const getTileSizeOptions = () =>
   tileSizes.map((tileSize) => (
     <option key={tileSize} value={tileSizeToTrowelSize(tileSize)}>
       {tileSize}
     </option>
-  ))
+  ));
 
 const tileSizeToTrowelSize = (tileSize: TileSize): TrowelSize => {
-  const tileIdx = tileSizes.indexOf(tileSize)
-  return trowelSizes[tileIdx]
-}
+  const tileIdx = tileSizes.indexOf(tileSize);
+  return trowelSizes[tileIdx];
+};

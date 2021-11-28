@@ -9,6 +9,11 @@ export const adhesives = Object.freeze({
 
 export type Adhesive = keyof typeof adhesives;
 
+export const adhesivesNames = Object.keys(adhesives) as Adhesive[];
+
+export const isAdhesive = (name: any): name is Adhesive =>
+  adhesivesNames.includes(name);
+
 export const trowelSizes = Object.freeze(["4", "6", "8", "10", "12"] as const);
 export const tileSizes = Object.freeze([
   "<30",

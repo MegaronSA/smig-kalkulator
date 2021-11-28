@@ -3,13 +3,19 @@ import { CalculatorsTabs } from "components/shared";
 import { ShoppingListForm } from "components/shared/ShoppingListForm";
 import { ShoppingListResult } from "components/shared/ShoppingListResult";
 import { Adhesive, getPackageSize } from "data/adhesives";
+import { getInitialData } from "data/adhesives/qsUtils";
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { RequiredAmountForm } from "./RequiredAmountForm";
 
 interface Props {}
 
 export const Adhesives: React.FC<Props> = (props) => {
-  const [selectedProduct, setSelectedProduct] = useState<Adhesive>("F-2");
+  const [searchParams] = useSearchParams();
+  const initialData = getInitialData(searchParams);
+  const [selectedProduct, setSelectedProduct] = useState<Adhesive | undefined>(
+    initialData.name
+  );
 
   const [result, setResult] = useState<number>();
   const [packagesToBuy, setPackagesToBuy] = useState<number>();
@@ -29,7 +35,7 @@ export const Adhesives: React.FC<Props> = (props) => {
         />
         {result && <RequiredAmountResult result={result} />}
       </div>
-      {result && (
+      {result && selectedProduct && (
         <div className="px-8 py-6 animate-slideFromTop z-0 relative">
           <h5 className="font-semibold text-gray-400 text-sm">2. Zakupy</h5>
           <ShoppingListForm
@@ -38,7 +44,7 @@ export const Adhesives: React.FC<Props> = (props) => {
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
             packageTypes={getPackageSize(selectedProduct)}
-            initialPackSize={undefined}
+            initialPackSize={initialData.packageSize}
           />
           {packagesToBuy && (
             <ShoppingListResult
