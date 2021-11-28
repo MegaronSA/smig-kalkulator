@@ -3,22 +3,24 @@ import { AdornedInput } from "components/shared";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 
-interface Props<T> {
+interface Props {
   result: number;
   setPackagesToBuy: (packageToBuy: number | undefined) => void;
   packagesToBuy: number | undefined;
   setPriceSum: (priceSum: number | undefined) => void;
-  packageTypes: T[];
+  packageTypes: number[];
+  initialPackSize: number | undefined;
 }
 
-export const ShoppingListForm = <T extends number>({
+export const ShoppingListForm: React.FC<Props> = ({
   result,
   setPackagesToBuy,
   packagesToBuy,
   setPriceSum,
   packageTypes,
-}: Props<T>) => {
-  const [packageType, setPackageType] = useState<T>(packageTypes[0]);
+  initialPackSize,
+}) => {
+  const [packageType, setPackageType] = useState<number | undefined>();
   const [pricePerPackage, setPricePerPackage] = useState<string>("");
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export const ShoppingListForm = <T extends number>({
   }, [packagesToBuy, pricePerPackage]);
 
   useEffect(() => {
+    if (!packageType) return setPackageType(initialPackSize ?? packageTypes[0]);
     setPackageType(packageTypes[0]);
   }, [packageTypes]);
 
@@ -59,10 +62,10 @@ export const ShoppingListForm = <T extends number>({
   );
 };
 
-const getPackagingOptions = <T,>(
-  packageTypes: T[],
-  selectedPackageType: T,
-  onChange: (packageType: T) => void
+const getPackagingOptions = (
+  packageTypes: number[],
+  selectedPackageType: number | undefined,
+  onChange: (packageType: number) => void
 ) =>
   packageTypes.map((packageType) => {
     const isSelected = selectedPackageType === packageType;
@@ -71,6 +74,7 @@ const getPackagingOptions = <T,>(
       : "border";
     return (
       <div
+        key={`${packageType}`}
         className={`px-4 py-2 input cursor-pointer ${selectedStyles}`}
         onClick={() => onChange(packageType)}
       >{`${packageType} kg`}</div>

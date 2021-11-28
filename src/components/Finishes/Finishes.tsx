@@ -7,11 +7,19 @@ import {
   ShoppingListResult,
   ShoppingListForm,
 } from "components/shared";
+import { getInitialData } from "data/finishes/qsUtils";
+import { useSearchParams } from "react-router-dom";
 
 interface Props {}
 
 export const Finishes: React.FC<Props> = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Finish>("A-2");
+  const [searchParams] = useSearchParams();
+  const initialData = getInitialData(searchParams);
+  const [selectedProduct, setSelectedProduct] = useState<Finish | undefined>(
+    initialData.name
+  );
+
+  console.log(searchParams, initialData);
 
   const [result, setResult] = useState<number>();
   const [packagesToBuy, setPackagesToBuy] = useState<number>();
@@ -31,7 +39,7 @@ export const Finishes: React.FC<Props> = () => {
         />
         {result && <RequiredAmountResult result={result} />}
       </div>
-      {result && (
+      {result && selectedProduct && (
         <div className="px-8 py-6 animate-slideFromTop z-0 relative">
           <h5 className="font-semibold text-gray-400 text-sm">2. Zakupy</h5>
           <ShoppingListForm
@@ -40,6 +48,7 @@ export const Finishes: React.FC<Props> = () => {
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
             packageTypes={getPackageSize(selectedProduct)}
+            initialPackSize={initialData.packageSize}
           />
           {packagesToBuy && (
             <ShoppingListResult

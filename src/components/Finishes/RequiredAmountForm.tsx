@@ -11,7 +11,7 @@ import _ from "lodash";
 import React, { useEffect, useState } from "react";
 
 interface Props {
-  selectedProduct: Finish;
+  selectedProduct: Finish | undefined;
   setSelectedProduct: (product: Finish) => void;
   setResult: (result: number | undefined) => void;
 }
@@ -44,10 +44,10 @@ export const RequiredAmountForm: React.FC<Props> = ({
         <select
           name="product"
           className="mt-1 block w-full input"
-          value={selectedProduct}
+          value={selectedProduct ?? "none"}
           onChange={(e) => setSelectedProduct(e.target.value as Finish)}
         >
-          <option hidden disabled value={"default"} />
+          <option hidden disabled value={"none"} />
           {getProductOptions()}
         </select>
       </div>

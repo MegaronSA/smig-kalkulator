@@ -14,7 +14,11 @@ export const finishes = Object.freeze({
   "Df-16": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [20] },
 });
 
+export const finishesNames = Object.keys(finishes) as Finish[];
+
 export type Finish = keyof typeof finishes;
+export const isFinish = (name: any): name is Finish =>
+  finishesNames.includes(name as Finish);
 
 export const surfaces = Object.freeze([
   "Tynk gipsowy",
@@ -26,7 +30,3 @@ export const surfaces = Object.freeze([
 ] as const);
 
 export type Surface = typeof surfaces[number];
-
-export const packageTypes = Object.freeze([5, 10, 20] as const);
-
-export type PackageType = typeof packageTypes[number];

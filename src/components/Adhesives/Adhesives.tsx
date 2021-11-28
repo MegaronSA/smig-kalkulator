@@ -38,6 +38,7 @@ export const Adhesives: React.FC<Props> = (props) => {
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
             packageTypes={getPackageSize(selectedProduct)}
+            initialPackSize={undefined}
           />
           {packagesToBuy && (
             <ShoppingListResult
