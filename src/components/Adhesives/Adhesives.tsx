@@ -1,25 +1,26 @@
-import { RequiredAmountResult } from "components/Finishes/RequiredAmountResult";
-import { CalculatorsTabs } from "components/shared";
-import { ShoppingListForm } from "components/shared/ShoppingListForm";
-import { ShoppingListResult } from "components/shared/ShoppingListResult";
-import { Adhesive, getPackageSize } from "data/adhesives";
-import { getInitialData } from "data/adhesives/qsUtils";
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { RequiredAmountForm } from "./RequiredAmountForm";
+import {
+  CalculatorsTabs,
+  ShoppingListForm,
+  ShoppingListResult,
+} from 'components/shared'
+import { Adhesive, getInitialData, getPackageSize } from 'data/adhesives'
+import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { RequiredAmountForm } from './RequiredAmountForm'
+import { RequiredAmountResult } from './RequiredAmountResult'
 
 interface Props {}
 
 export const Adhesives: React.FC<Props> = (props) => {
-  const [searchParams] = useSearchParams();
-  const initialData = getInitialData(searchParams);
+  const [searchParams] = useSearchParams()
+  const initialData = getInitialData(searchParams)
   const [selectedProduct, setSelectedProduct] = useState<Adhesive | undefined>(
-    initialData.name
-  );
+    initialData.name,
+  )
 
-  const [result, setResult] = useState<number>();
-  const [packagesToBuy, setPackagesToBuy] = useState<number>();
-  const [priceSum, setPriceSum] = useState<number>();
+  const [result, setResult] = useState<number>()
+  const [packagesToBuy, setPackagesToBuy] = useState<number>()
+  const [priceSum, setPriceSum] = useState<number>()
 
   return (
     <div className="container mx-auto max-w-lg overflow-x-hidden">
@@ -55,5 +56,5 @@ export const Adhesives: React.FC<Props> = (props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
