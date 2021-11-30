@@ -16,7 +16,7 @@ export const ShoppingListResult: React.FC<Props> = ({
       <aside className="w-2/5 relative -left-4">
         <img src={imgUrl} alt="lista_img" />
       </aside>
-      <div className="w-3/5 h-full flex flex-col justify-start py-4">
+      <div className="w-3/5 h-full flex flex-col justify-start py-4 text-right">
         <h5 className="text-gray-700 text-lg font-bold">Lista zakupów:</h5>
         <div>
           <h6 className=" font-roboto-slab text-gray-400 font-medium text-sm">

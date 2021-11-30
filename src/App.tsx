@@ -1,5 +1,6 @@
 import { Adhesives } from 'components/Adhesives'
 import { Finishes } from 'components/Finishes'
+import { Tabs } from 'components/shared/Tabs'
 import { TopBar } from 'components/TopBar'
 import React from 'react'
 import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
@@ -22,7 +23,8 @@ const App = () => {
             path="/gladzie"
             element={
               <>
-                <TopBar currentTab="gladzie" />
+                <TopBar />
+                <Tabs currentTab="gladzie" />
                 <Finishes />
               </>
             }
@@ -31,7 +33,8 @@ const App = () => {
             path="/kleje"
             element={
               <>
-                <TopBar currentTab="kleje" />
+                <TopBar />
+                <Tabs currentTab="kleje" />
                 <Adhesives />
               </>
             }

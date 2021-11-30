@@ -12,6 +12,7 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto'],
         'roboto-slab': ['Roboto Slab'],
+        montserrat: ['Montserrat'],
       },
       fontSize: {
         'semi-lg': '1.05rem',
