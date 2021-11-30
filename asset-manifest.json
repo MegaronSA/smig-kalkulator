@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/smig-kalkulator/static/css/main.687c0a2b.chunk.css",
-    "main.js": "/smig-kalkulator/static/js/main.3ca14537.chunk.js",
-    "main.js.map": "/smig-kalkulator/static/js/main.3ca14537.chunk.js.map",
+    "main.css": "/smig-kalkulator/static/css/main.b52e639c.chunk.css",
+    "main.js": "/smig-kalkulator/static/js/main.8687bb46.chunk.js",
+    "main.js.map": "/smig-kalkulator/static/js/main.8687bb46.chunk.js.map",
     "runtime-main.js": "/smig-kalkulator/static/js/runtime-main.4ed6631e.js",
     "runtime-main.js.map": "/smig-kalkulator/static/js/runtime-main.4ed6631e.js.map",
     "static/js/2.179676c2.chunk.js": "/smig-kalkulator/static/js/2.179676c2.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.59434cd3.chunk.js": "/smig-kalkulator/static/js/3.59434cd3.chunk.js",
     "static/js/3.59434cd3.chunk.js.map": "/smig-kalkulator/static/js/3.59434cd3.chunk.js.map",
     "index.html": "/smig-kalkulator/index.html",
-    "static/css/main.687c0a2b.chunk.css.map": "/smig-kalkulator/static/css/main.687c0a2b.chunk.css.map",
+    "static/css/main.b52e639c.chunk.css.map": "/smig-kalkulator/static/css/main.b52e639c.chunk.css.map",
     "static/js/2.179676c2.chunk.js.LICENSE.txt": "/smig-kalkulator/static/js/2.179676c2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4ed6631e.js",
     "static/js/2.179676c2.chunk.js",
-    "static/css/main.687c0a2b.chunk.css",
-    "static/js/main.3ca14537.chunk.js"
+    "static/css/main.b52e639c.chunk.css",
+    "static/js/main.8687bb46.chunk.js"
   ]
 }
