@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AdornedInput } from "components/shared";
+import { AdornedInput, NativeSelect } from 'components/shared/inputs'
 import {
   Finish,
-  Surface,
-  finishes,
-  surfaces,
+  finishesNames,
   getFinishEfficiency,
-} from "data/finishes";
-import _ from "lodash";
-import React, { useEffect, useState } from "react";
+  Surface,
+  surfaces,
+} from 'data/finishes'
+import _ from 'lodash'
+import React, { useEffect, useState } from 'react'
 
 interface Props {
-  selectedProduct: Finish | undefined;
-  setSelectedProduct: (product: Finish) => void;
-  setResult: (result: number | undefined) => void;
+  selectedProduct: Finish | undefined
+  setSelectedProduct: (product: Finish) => void
+  setResult: (result: number | undefined) => void
 }
 
 export const RequiredAmountForm: React.FC<Props> = ({
@@ -21,66 +21,59 @@ export const RequiredAmountForm: React.FC<Props> = ({
   selectedProduct,
   setSelectedProduct,
 }) => {
-  const [area, setArea] = useState<string>("");
-  const [surface, setSurface] = useState<Surface>();
+  const [area, setArea] = useState<string>('')
+  const [surface, setSurface] = useState<Surface>()
 
-  const parsedArea = parseFloat(area);
-  const isAreaValid = _.isNumber(parsedArea) && !_.isNaN(parsedArea);
+  const parsedArea = _.toNumber(area.replace(',', '.'))
+  const isAreaValid = !_.isNaN(parsedArea) && parsedArea > 0
+  const allowed = /^0[.,]?$|^$/
 
   useEffect(() => {
-    const isValid = selectedProduct && isAreaValid && surface;
-    if (!isValid) return setResult(undefined);
-    const efficiency = getFinishEfficiency(selectedProduct, surface);
-    const result = parsedArea / efficiency;
-    setResult(result);
-  }, [selectedProduct, area, surface]);
+    const isValid = selectedProduct && isAreaValid && surface
+    if (!isValid) return setResult(undefined)
+    const efficiency = getFinishEfficiency(selectedProduct, surface)
+    const result = parsedArea / efficiency
+    setResult(result)
+  }, [selectedProduct, area, surface])
 
   return (
     <section className="my-6 flex flex-col gap-6">
       <div>
-        <label className="input-label" htmlFor="product">
-          Produkt:
-        </label>
-        <select
+        <NativeSelect
+          value={selectedProduct}
+          onChange={setSelectedProduct}
+          label="Produkt"
           name="product"
-          className="mt-1 block w-full input"
-          value={selectedProduct ?? "none"}
-          onChange={(e) => setSelectedProduct(e.target.value as Finish)}
-        >
-          <option hidden disabled value={"none"} />
-          {getProductOptions()}
-        </select>
+          options={finishesNames}
+          valid={Boolean(selectedProduct)}
+        />
       </div>
       <div>
-        <label className="input-label">Powierzchnia:</label>
         <AdornedInput
+          label="Powierzchnia:"
+          name="area"
           adornmentContent="m²"
           className="mt-1 block w-full input"
           value={area}
           onChange={(e) => setArea(e.target.value)}
+          valid={isAreaValid}
+          error={
+            !isAreaValid && !area.match(allowed)
+              ? 'Powierzchnia musi być prawidłową liczbą dodatnią'
+              : undefined
+          }
         />
       </div>
       <div>
-        <label className="input-label" htmlFor="product">
-          Rodzaj podłoża:
-        </label>
-        <select
-          name="product"
-          className="mt-1 block w-full input"
+        <NativeSelect
           value={surface}
-          onChange={(e) => setSurface(e.target.value as Surface)}
-          defaultValue={"default"}
-        >
-          <option hidden disabled value={"default"} />
-          {getSurfaceOptions()}
-        </select>
+          onChange={setSurface}
+          label="Rodzaj podłoża:"
+          name="surface"
+          options={surfaces}
+          valid={Boolean(surface)}
+        />
       </div>
     </section>
-  );
-};
-
-const getProductOptions = () =>
-  Object.keys(finishes).map((finish) => <option key={finish}>{finish}</option>);
-
-const getSurfaceOptions = () =>
-  surfaces.map((surface) => <option key={surface}>{surface}</option>);
+  )
+}

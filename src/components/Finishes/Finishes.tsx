@@ -25,9 +25,9 @@ export const Finishes: React.FC<Props> = () => {
   return (
     <div className="container mx-auto max-w-lg overflow-x-hidden">
       <CalculatorsTabs currentTab="gladzie" />
-      <div className="px-8 py-6 z-10 bg-white relative">
+      <div className="px-8 pt-6 z-10 bg-white relative">
         <h5 className="font-semibold text-gray-400 text-sm">
-          1. Zużycie gładzi
+          <span>1. Zużycie gładzi</span>
         </h5>
         <RequiredAmountForm
           setResult={setResult}
