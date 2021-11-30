@@ -7,7 +7,6 @@ import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
 const App = () => {
   return (
     <div className="font-roboto">
-      <TopBar />
       <Router>
         <Routes>
           <Route
@@ -19,8 +18,24 @@ const App = () => {
               </div>
             }
           />
-          <Route path="/gladzie" element={<Finishes />} />
-          <Route path="/kleje" element={<Adhesives />} />
+          <Route
+            path="/gladzie"
+            element={
+              <>
+                <TopBar currentTab="gladzie" />
+                <Finishes />
+              </>
+            }
+          />
+          <Route
+            path="/kleje"
+            element={
+              <>
+                <TopBar currentTab="kleje" />
+                <Adhesives />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </div>
