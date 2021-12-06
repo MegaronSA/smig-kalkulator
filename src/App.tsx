@@ -7,7 +7,7 @@ import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
 
 const App = () => {
   return (
-    <div className="font-roboto">
+    <div className="font-roboto overflow-x-hidden">
       <Router>
         <Routes>
           <Route

@@ -1,5 +1,6 @@
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import React from 'react'
+import { AppearTransition } from '../styled'
 
 interface Props<T extends string> {
   value: T | undefined
@@ -41,9 +42,9 @@ export const NativeSelect = <T extends string>({
             <option key={option}>{option}</option>
           ))}
         </select>
-        {valid && !hideIcon && (
+        <AppearTransition show={Boolean(valid) && !hideIcon}>
           <CheckCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-green-700" />
-        )}
+        </AppearTransition>
       </div>
     </div>
   )

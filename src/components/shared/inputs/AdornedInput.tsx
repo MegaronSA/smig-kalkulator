@@ -1,5 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline'
 import React from 'react'
+import { AppearTransition } from '../styled'
 
 interface Props {
   adornmentContent: string
@@ -50,12 +51,12 @@ export const AdornedInput: React.FC<Props> = ({
             {adornmentContent}
           </span>
         </div>
-        {valid && (
+        <AppearTransition show={Boolean(valid)}>
           <CheckCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-green-700" />
-        )}
-        {error && (
+        </AppearTransition>
+        <AppearTransition show={Boolean(error)}>
           <XCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-red-700" />
-        )}
+        </AppearTransition>
       </div>
       {error && <p className="text-sm mt-1 text-red-700">{error}</p>}
     </div>

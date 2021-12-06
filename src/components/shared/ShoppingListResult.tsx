@@ -12,8 +12,8 @@ export const ShoppingListResult: React.FC<Props> = ({
   priceSum,
 }) => {
   return (
-    <section className="w-full flex flex-row">
-      <aside className="w-2/5 relative -left-4">
+    <section className="w-full flex flex-row items-center">
+      <aside className="w-2/5 relative -left-4 py-2">
         <img src={imgUrl} alt="lista_img" />
       </aside>
       <div className="w-3/5 h-full flex flex-col justify-start py-4 text-right">
