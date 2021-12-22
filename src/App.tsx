@@ -1,5 +1,6 @@
 import { Adhesives } from 'components/Adhesives'
 import { Finishes } from 'components/Finishes'
+import { GKs } from 'components/GKs'
 import { Tabs } from 'components/shared/Tabs'
 import { TopBar } from 'components/TopBar'
 import React from 'react'
@@ -16,6 +17,7 @@ const App = () => {
               <div className="w-full flex flex-col gap-4 text-center mt-20 text-lg font-bold">
                 <Link to="/gladzie">Gladzie</Link>
                 <Link to="/kleje">Kleje</Link>
+                <Link to="/gk">Łączenie płyt g-k</Link>
               </div>
             }
           />
@@ -36,6 +38,16 @@ const App = () => {
                 <TopBar />
                 <Tabs currentTab="kleje" />
                 <Adhesives />
+              </>
+            }
+          />
+          <Route
+            path="/gk"
+            element={
+              <>
+                <TopBar />
+                <Tabs currentTab="gk" />
+                <GKs />
               </>
             }
           />

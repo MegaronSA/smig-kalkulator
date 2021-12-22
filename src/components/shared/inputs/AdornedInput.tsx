@@ -4,34 +4,39 @@ import { AppearTransition } from '../styled'
 
 interface Props {
   adornmentContent: string
-  className?: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   label: string
   name: string
   valid?: boolean
   error?: string
+  classes?: {
+    input?: string
+    container?: string
+  }
+  hideIcon?: boolean
 }
 
 export const AdornedInput: React.FC<Props> = ({
   adornmentContent,
-  className,
+  classes,
   value,
   onChange,
   label,
   name,
   valid,
   error,
+  hideIcon,
 }) => {
   return (
-    <div>
+    <div className={classes?.container}>
       <label className="input-label" htmlFor={name}>
         {label}
       </label>
       <div className="relative">
         <input
           name={name}
-          className={`${className} ${
+          className={`${classes?.input} ${
             error
               ? 'border-red-700 focus:ring-red-200 focus:border-red-700'
               : ''
@@ -51,10 +56,10 @@ export const AdornedInput: React.FC<Props> = ({
             {adornmentContent}
           </span>
         </div>
-        <AppearTransition show={Boolean(valid)}>
+        <AppearTransition show={Boolean(valid) && !hideIcon}>
           <CheckCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-green-700" />
         </AppearTransition>
-        <AppearTransition show={Boolean(error)}>
+        <AppearTransition show={Boolean(error) && !hideIcon}>
           <XCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-red-700" />
         </AppearTransition>
       </div>

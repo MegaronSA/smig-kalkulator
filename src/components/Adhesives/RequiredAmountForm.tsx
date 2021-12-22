@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AdornedInput, NativeSelect } from 'components/shared/inputs'
+import { AreaCalculator } from 'components/shared/AreaCalculator'
+import { NativeSelect } from 'components/shared/inputs'
 import {
   Adhesive,
   adhesivesNames,
@@ -28,13 +29,12 @@ export const RequiredAmountForm: React.FC<Props> = ({
 
   const parsedArea = _.toNumber(area.replace(',', '.'))
   const isAreaValid = !_.isNaN(parsedArea) && parsedArea > 0
-  const allowed = /^0[.,]?$|^$/
 
   useEffect(() => {
     const isValid = selectedProduct && isAreaValid && trowelSize
     if (!isValid) return setResult(undefined)
     const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize)
-    const result = parsedArea / efficiency
+    const result = parsedArea * efficiency
     setResult(result)
   }, [selectedProduct, area, trowelSize])
 
@@ -51,20 +51,7 @@ export const RequiredAmountForm: React.FC<Props> = ({
         />
       </div>
       <div>
-        <AdornedInput
-          label="Powierzchnia:"
-          name="area"
-          adornmentContent="m²"
-          className="mt-1 block w-full input"
-          value={area}
-          onChange={(e) => setArea(e.target.value)}
-          valid={isAreaValid}
-          error={
-            !isAreaValid && !area.match(allowed)
-              ? 'Powierzchnia musi być prawidłową liczbą dodatnią'
-              : undefined
-          }
-        />
+        <AreaCalculator area={area} setArea={setArea} />
       </div>
       <div className="flex flex-col xs:flex-row xs:justify-between xs:items-end">
         <div>

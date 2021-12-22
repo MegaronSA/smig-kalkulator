@@ -3,18 +3,18 @@ import {
   ShoppingListForm,
   ShoppingListResult,
 } from 'components/shared'
-import { Adhesive, getInitialData, getPackageSize } from 'data/adhesives'
+import { getPackageSize, GK } from 'data/gk'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { RequiredAmountForm } from './RequiredAmountForm'
 
 interface Props {}
 
-export const Adhesives: React.FC<Props> = (props) => {
+export const GKs: React.FC<Props> = (props) => {
   const [searchParams] = useSearchParams()
-  const initialData = getInitialData(searchParams)
-  const [selectedProduct, setSelectedProduct] = useState<Adhesive | undefined>(
-    initialData.name,
+  // const initialData = getInitialData(searchParams)
+  const [selectedProduct, setSelectedProduct] = useState<GK | undefined>(
+    'ŚMIG A-2',
   )
 
   const [result, setResult] = useState<number>()
@@ -25,7 +25,7 @@ export const Adhesives: React.FC<Props> = (props) => {
     <div className="container mx-auto max-w-lg overflow-x-hidden">
       <div className="px-8 pt-6 z-10 bg-white relative">
         <h5 className="font-semibold text-gray-400 text-sm">
-          1. Zużycie kleju
+          <span>1. Zużycie gładzi</span>
         </h5>
         <RequiredAmountForm
           setResult={setResult}
@@ -43,7 +43,7 @@ export const Adhesives: React.FC<Props> = (props) => {
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
             packageTypes={getPackageSize(selectedProduct)}
-            initialPackSize={initialData.packageSize}
+            initialPackSize={undefined}
           />
           {packagesToBuy && (
             <ShoppingListResult

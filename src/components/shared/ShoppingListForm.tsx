@@ -56,7 +56,7 @@ export const ShoppingListForm: React.FC<Props> = ({
           label={'Cena za opakowanie:'}
           name="pricePerPackage"
           adornmentContent="zł"
-          className="mt-1 block w-full input"
+          classes={{ input: 'mt-1 block w-full input' }}
           value={pricePerPackage}
           onChange={(e) => setPricePerPackage(e.target.value)}
           error={

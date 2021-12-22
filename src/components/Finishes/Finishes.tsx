@@ -1,9 +1,12 @@
-import { ShoppingListForm, ShoppingListResult } from 'components/shared'
+import {
+  RequiredAmountResult,
+  ShoppingListForm,
+  ShoppingListResult,
+} from 'components/shared'
 import { Finish, getInitialData, getPackageSize } from 'data/finishes'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { RequiredAmountForm } from './RequiredAmountForm'
-import { RequiredAmountResult } from './RequiredAmountResult'
 
 interface Props {}
 
