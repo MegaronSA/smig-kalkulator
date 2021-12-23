@@ -3,7 +3,7 @@ import {
   ShoppingListForm,
   ShoppingListResult,
 } from 'components/shared'
-import { getPackageSize, GK } from 'data/gk'
+import { getInitialData, getPackageSize, GK } from 'data/gk'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { RequiredAmountForm } from './RequiredAmountForm'
@@ -12,9 +12,9 @@ interface Props {}
 
 export const GKs: React.FC<Props> = (props) => {
   const [searchParams] = useSearchParams()
-  // const initialData = getInitialData(searchParams)
+  const initialData = getInitialData(searchParams)
   const [selectedProduct, setSelectedProduct] = useState<GK | undefined>(
-    'ŚMIG A-2',
+    initialData.name,
   )
 
   const [result, setResult] = useState<number>()
@@ -25,7 +25,7 @@ export const GKs: React.FC<Props> = (props) => {
     <div className="container mx-auto max-w-lg overflow-x-hidden">
       <div className="px-8 pt-6 z-10 bg-white relative">
         <h5 className="font-semibold text-gray-400 text-sm">
-          <span>1. Zużycie gładzi</span>
+          <span>1. Liczenie zapotrzebowania</span>
         </h5>
         <RequiredAmountForm
           setResult={setResult}
@@ -43,7 +43,7 @@ export const GKs: React.FC<Props> = (props) => {
             packagesToBuy={packagesToBuy}
             setPriceSum={setPriceSum}
             packageTypes={getPackageSize(selectedProduct)}
-            initialPackSize={undefined}
+            initialPackSize={initialData.packageSize}
           />
           {packagesToBuy && (
             <ShoppingListResult

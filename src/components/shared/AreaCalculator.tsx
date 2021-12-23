@@ -24,7 +24,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
   const allowed = /^0[.,]?$|^$/
 
   useEffect(() => {
-    if (!isHeightValid || !isWidthValid) return
+    if (!isHeightValid || !isWidthValid) return setArea('')
     const calculatedArea = (parsedHeight * parsedWidth).toFixed(2)
     if (area !== calculatedArea) setArea(calculatedArea)
   }, [height, width])
