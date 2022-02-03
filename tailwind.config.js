@@ -8,6 +8,7 @@ module.exports = {
       xs: '475px',
       ...defaultTheme.screens,
     },
+    
     extend: {
       fontFamily: {
         roboto: ['Roboto'],
@@ -65,7 +66,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+    },
   },
   plugins: [require('@tailwindcss/forms')],
 }

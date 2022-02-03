@@ -1,20 +1,21 @@
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline'
-import React from 'react'
-import { AppearTransition } from '../styled'
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/outline";
+import React from "react";
+import { AppearTransition } from "../styled";
 
 interface Props {
-  adornmentContent: string
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  label: string
-  name: string
-  valid?: boolean
-  error?: string
+  adornmentContent: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  name: string;
+  valid?: boolean;
+  error?: string;
   classes?: {
-    input?: string
-    container?: string
-  }
-  hideIcon?: boolean
+    input?: string;
+    container?: string;
+  };
+  hideIcon?: boolean;
+  type?: "text" | "number";
 }
 
 export const AdornedInput: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const AdornedInput: React.FC<Props> = ({
   valid,
   error,
   hideIcon,
+  type,
 }) => {
   return (
     <div className={classes?.container}>
@@ -38,14 +40,14 @@ export const AdornedInput: React.FC<Props> = ({
           name={name}
           className={`${classes?.input} ${
             error
-              ? 'border-red-700 focus:ring-red-200 focus:border-red-700'
-              : ''
+              ? "border-red-700 focus:ring-red-200 focus:border-red-700"
+              : ""
           } ${
             valid
-              ? 'border-green-700 focus:border-green:700 focus:ring-green-600 focus:ring-opacity-30'
-              : ''
+              ? "border-green-700 focus:border-green:700 focus:ring-green-600 focus:ring-opacity-30"
+              : ""
           }`}
-          type="text"
+          type={type ?? "text"}
           value={value}
           onChange={onChange}
         />
@@ -65,5 +67,5 @@ export const AdornedInput: React.FC<Props> = ({
       </div>
       {error && <p className="text-sm mt-1 text-red-700">{error}</p>}
     </div>
-  )
-}
+  );
+};
