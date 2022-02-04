@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AdornedInput } from "./inputs";
 import { Dialog, useDialog } from "./styled/Dialog";
+import { numberRegex } from "./utils";
 
 interface Props {
   area: string;
@@ -22,8 +23,6 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
   const isHeightValid = !_.isNaN(parsedHeight) && parsedHeight > 0;
   const parsedWidth = _.toNumber(width.replace(",", "."));
   const isWidthValid = !_.isNaN(parsedWidth) && parsedWidth > 0;
-
-  const allowed = /^0[.,]?$|^$/;
 
   const calculateAreaEnabled =
     isWidthValid && isHeightValid && height !== "" && width !== "";
@@ -51,7 +50,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
             hideIcon
             type="number"
             error={
-              !isHeightValid && !height.match(allowed)
+              !isHeightValid && !height.match(numberRegex)
                 ? "Długość musi być prawidłową liczbą dodatnią"
                 : undefined
             }
@@ -66,7 +65,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
             type="number"
             onChange={(e) => setWidth(e.target.value)}
             error={
-              !isWidthValid && !width.match(allowed)
+              !isWidthValid && !width.match(numberRegex)
                 ? "Szerokość musi być prawidłową liczbą dodatnią"
                 : undefined
             }
@@ -92,7 +91,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
           onChange={(e) => setArea(e.target.value)}
           valid={isAreaValid}
           error={
-            !isAreaValid && !area.match(allowed)
+            !isAreaValid && !area.match(numberRegex)
               ? "Powierzchnia musi być prawidłową liczbą dodatnią"
               : undefined
           }

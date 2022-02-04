@@ -47,7 +47,8 @@ export const AdornedInput: React.FC<Props> = ({
               ? "border-green-700 focus:border-green:700 focus:ring-green-600 focus:ring-opacity-30"
               : ""
           }`}
-          type={type ?? "text"}
+          type="text"
+          pattern={type === "number" ? "d*" : undefined}
           value={value}
           onChange={onChange}
         />
