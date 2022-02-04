@@ -1,14 +1,14 @@
-import { Adhesives } from 'components/Adhesives'
-import { Finishes } from 'components/Finishes'
-import { GKs } from 'components/GKs'
-import { Tabs } from 'components/shared/Tabs'
-import { TopBar } from 'components/TopBar'
-import React from 'react'
-import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
+import { Adhesives } from "components/Adhesives";
+import { Finishes } from "components/Finishes";
+import { GKs } from "components/GKs";
+import { Tabs } from "components/shared/Tabs";
+import { TopBar } from "components/TopBar";
+import React from "react";
+import { HashRouter as Router, Link, Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="font-roboto overflow-x-hidden">
+    <div className="font-roboto overflow-x-hidden scroll-smooth">
       <Router>
         <Routes>
           <Route
@@ -54,7 +54,7 @@ const App = () => {
         </Routes>
       </Router>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

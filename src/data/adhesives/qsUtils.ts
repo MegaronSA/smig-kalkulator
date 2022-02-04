@@ -5,10 +5,10 @@ export interface AdhesivesInitialData {
   packageSize: number | undefined;
 }
 
-const getValidName = (name: string | null) =>
+export const getValidName = (name: string | null) =>
   isAdhesive(name) ? name : undefined;
 
-const getValidPackSize = (
+export const getValidPackSize = (
   packSize: string | null,
   validName: Adhesive | undefined
 ) => {
@@ -21,7 +21,7 @@ const getValidPackSize = (
 export const getInitialData = (
   queryString: URLSearchParams
 ): AdhesivesInitialData => {
-  const validName = getValidName(queryString.get("name"));
+  const validName = getValidName(queryString.get("productName"));
   const validPackageSize = getValidPackSize(
     queryString.get("packSize"),
     validName

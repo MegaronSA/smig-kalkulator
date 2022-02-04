@@ -5,10 +5,10 @@ export interface FinishesInitialData {
   packageSize: number | undefined;
 }
 
-const getValidName = (name: string | null) =>
+export const getValidName = (name: string | null) =>
   isFinish(name) ? name : undefined;
 
-const getValidPackSize = (
+export const getValidPackSize = (
   packSize: string | null,
   validName: Finish | undefined
 ) => {

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AreaCalculator } from "components/shared/AreaCalculator";
 import { AdornedInput, NativeSelect } from "components/shared/inputs";
-import { numberRegex } from "components/shared/utils";
 import {
   getGKEfficiency,
   GK,
@@ -23,18 +22,15 @@ export const RequiredAmountForm: React.FC<Props> = ({
   selectedProduct,
   setSelectedProduct,
 }) => {
-  const [area, setArea] = useState<string>("");
+  const [area, setArea] = useState<number | undefined>();
 
   const [selectionType, setSelectionType] = useState<SelectionType>();
   const [surfaceArea, setSurfaceArea] = useState<SurfaceArea>();
 
-  const parsedArea = _.toNumber(area.replace(",", "."));
-  const isAreaValid = !_.isNaN(parsedArea) && parsedArea > 0;
-
   useEffect(() => {
     const isValid =
       selectedProduct &&
-      isAreaValid &&
+      area &&
       ((selectionType === "surfaceArea" && surfaceArea) ||
         selectionType === "alternative");
     if (!isValid) return setResult(undefined);
@@ -42,7 +38,7 @@ export const RequiredAmountForm: React.FC<Props> = ({
       selectedProduct,
       selectionType === "surfaceArea" ? surfaceArea : undefined
     );
-    const result = parsedArea * efficiency;
+    const result = area * efficiency;
     setResult(result);
   }, [selectedProduct, area, surfaceArea, selectionType]);
 
@@ -78,15 +74,9 @@ export const RequiredAmountForm: React.FC<Props> = ({
           label="Metry bieżące:"
           adornmentContent="m.b."
           value={area}
-          onChange={(e) => setArea(e.target.value)}
+          onChange={setArea}
           classes={{ input: "mt-1 block input w-full" }}
-          type="number"
-          valid={isAreaValid}
-          error={
-            !isAreaValid && !area.match(numberRegex)
-              ? "Metry bieżące muszą być prawidłową liczbą dodatnią"
-              : undefined
-          }
+          error="Metry bieżące muszą być prawidłową liczbą dodatnią"
         />
       )}
       {selectionType === "surfaceArea" && (

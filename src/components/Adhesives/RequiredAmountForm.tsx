@@ -24,17 +24,14 @@ export const RequiredAmountForm: React.FC<Props> = ({
   selectedProduct,
   setSelectedProduct,
 }) => {
-  const [area, setArea] = useState<string>("");
+  const [area, setArea] = useState<number | undefined>();
   const [trowelSize, setTrowelSize] = useState<TrowelSize>();
 
-  const parsedArea = _.toNumber(area.replace(",", "."));
-  const isAreaValid = !_.isNaN(parsedArea) && parsedArea > 0;
-
   useEffect(() => {
-    const isValid = selectedProduct && isAreaValid && trowelSize;
+    const isValid = selectedProduct && area && trowelSize;
     if (!isValid) return setResult(undefined);
     const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize);
-    const result = parsedArea * efficiency;
+    const result = area * efficiency;
     setResult(result);
   }, [selectedProduct, area, trowelSize]);
 

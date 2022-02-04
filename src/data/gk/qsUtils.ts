@@ -5,10 +5,10 @@ export interface GKInitialData {
   packageSize: number | undefined;
 }
 
-const getValidName = (name: string | null) =>
+export const getValidName = (name: string | null) =>
   isGK(name) ? name : undefined;
 
-const getValidPackSize = (
+export const getValidPackSize = (
   packSize: string | null,
   validName: GK | undefined
 ) => {
@@ -18,9 +18,7 @@ const getValidPackSize = (
   return isPackSizeValid ? parsedSize : undefined;
 };
 
-export const getInitialData = (
-  queryString: URLSearchParams
-): GKInitialData => {
+export const getInitialData = (queryString: URLSearchParams): GKInitialData => {
   const validName = getValidName(queryString.get("name"));
   const validPackageSize = getValidPackSize(
     queryString.get("packSize"),

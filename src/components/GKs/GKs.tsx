@@ -1,25 +1,31 @@
 import {
+  removeSearchParam,
   RequiredAmountResult,
   ShoppingListForm,
   ShoppingListResult,
-} from 'components/shared'
-import { getInitialData, getPackageSize, GK } from 'data/gk'
-import React, { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { RequiredAmountForm } from './RequiredAmountForm'
+} from "components/shared";
+import { getInitialData, getPackageSize, getValidName, GK } from "data/gk";
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { RequiredAmountForm } from "./RequiredAmountForm";
 
 interface Props {}
 
 export const GKs: React.FC<Props> = (props) => {
-  const [searchParams] = useSearchParams()
-  const initialData = getInitialData(searchParams)
-  const [selectedProduct, setSelectedProduct] = useState<GK | undefined>(
-    initialData.name,
-  )
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialData = getInitialData(searchParams);
 
-  const [result, setResult] = useState<number>()
-  const [packagesToBuy, setPackagesToBuy] = useState<number>()
-  const [priceSum, setPriceSum] = useState<number>()
+  const selectedProduct = getValidName(searchParams.get("productName"));
+  const setSelectedProduct = (product: GK) => {
+    const productName = getValidName(product);
+    if (!productName)
+      return setSearchParams(removeSearchParam(searchParams, "productName"));
+    setSearchParams({ ...searchParams, productName });
+  };
+
+  const [result, setResult] = useState<number>();
+  const [packagesToBuy, setPackagesToBuy] = useState<number>();
+  const [priceSum, setPriceSum] = useState<number>();
 
   return (
     <div className="container mx-auto max-w-lg overflow-x-hidden">
@@ -54,5 +60,5 @@ export const GKs: React.FC<Props> = (props) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};

@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AreaCalculator } from 'components/shared/AreaCalculator'
-import { NativeSelect } from 'components/shared/inputs'
+import { AreaCalculator } from "components/shared/AreaCalculator";
+import { NativeSelect } from "components/shared/inputs";
 import {
   Finish,
   finishesNames,
   getFinishEfficiency,
   Surface,
   surfaces,
-} from 'data/finishes'
-import _ from 'lodash'
-import React, { useEffect, useState } from 'react'
+} from "data/finishes";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
 
 interface Props {
-  selectedProduct: Finish | undefined
-  setSelectedProduct: (product: Finish) => void
-  setResult: (result: number | undefined) => void
+  selectedProduct: Finish | undefined;
+  setSelectedProduct: (product: Finish) => void;
+  setResult: (result: number | undefined) => void;
 }
 
 export const RequiredAmountForm: React.FC<Props> = ({
@@ -22,19 +22,18 @@ export const RequiredAmountForm: React.FC<Props> = ({
   selectedProduct,
   setSelectedProduct,
 }) => {
-  const [area, setArea] = useState<string>('')
-  const [surface, setSurface] = useState<Surface>()
+  const [area, setArea] = useState<number | undefined>();
+  const [surface, setSurface] = useState<Surface>();
 
-  const parsedArea = _.toNumber(area.replace(',', '.'))
-  const isAreaValid = !_.isNaN(parsedArea) && parsedArea > 0
+  console.log(area);
 
   useEffect(() => {
-    const isValid = selectedProduct && isAreaValid && surface
-    if (!isValid) return setResult(undefined)
-    const efficiency = getFinishEfficiency(selectedProduct, surface)
-    const result = parsedArea * efficiency
-    setResult(result)
-  }, [selectedProduct, area, surface])
+    const isValid = selectedProduct && area && surface;
+    if (!isValid) return setResult(undefined);
+    const efficiency = getFinishEfficiency(selectedProduct, surface);
+    const result = area * efficiency;
+    setResult(result);
+  }, [selectedProduct, area, surface]);
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -62,5 +61,5 @@ export const RequiredAmountForm: React.FC<Props> = ({
         />
       </div>
     </section>
-  )
-}
+  );
+};

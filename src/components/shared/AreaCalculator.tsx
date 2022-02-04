@@ -1,39 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import _ from "lodash";
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useState } from "react";
 import { AdornedInput } from "./inputs";
 import { Dialog, useDialog } from "./styled/Dialog";
 import { numberRegex } from "./utils";
 
 interface Props {
-  area: string;
-  setArea: (area: string) => void;
+  area: number | undefined;
+  setArea: (area: number | undefined) => void;
 }
 
 export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
   const dialog = useDialog("powierzchnia");
 
-  const [height, setHeight] = useState<string>("");
-  const [width, setWidth] = useState<string>("");
+  const [height, setHeight] = useState<number | undefined>();
+  const [width, setWidth] = useState<number | undefined>();
 
-  const parsedArea = _.toNumber(area.replace(",", "."));
-  const isAreaValid = !_.isNaN(parsedArea) && parsedArea > 0;
-  const parsedHeight = _.toNumber(height.replace(",", "."));
-  const isHeightValid = !_.isNaN(parsedHeight) && parsedHeight > 0;
-  const parsedWidth = _.toNumber(width.replace(",", "."));
-  const isWidthValid = !_.isNaN(parsedWidth) && parsedWidth > 0;
-
-  const calculateAreaEnabled =
-    isWidthValid && isHeightValid && height !== "" && width !== "";
+  const calculateAreaEnabled = height && width;
 
   const onCalculateArea = () => {
-    if (!calculateAreaEnabled) return setArea("");
-    const calculatedArea = (parsedHeight * parsedWidth).toFixed(2);
+    if (!calculateAreaEnabled) return setArea(undefined);
+    const calculatedArea = height * width;
     dialog.close();
     if (area !== calculatedArea) setArea(calculatedArea);
-    setHeight("");
-    setWidth("");
+    setHeight(undefined);
+    setWidth(undefined);
   };
 
   return (
@@ -46,14 +37,8 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
             adornmentContent="m"
             classes={{ input: "mt-1 block input w-full" }}
             value={height}
-            onChange={(e) => setHeight(e.target.value)}
-            hideIcon
-            type="number"
-            error={
-              !isHeightValid && !height.match(numberRegex)
-                ? "Długość musi być prawidłową liczbą dodatnią"
-                : undefined
-            }
+            onChange={setHeight}
+            error="Długość musi być prawidłową liczbą dodatnią"
           />
           <AdornedInput
             label="Szerokość:"
@@ -61,14 +46,8 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
             adornmentContent="m"
             classes={{ input: "mt-1 block input w-full" }}
             value={width}
-            hideIcon
-            type="number"
-            onChange={(e) => setWidth(e.target.value)}
-            error={
-              !isWidthValid && !width.match(numberRegex)
-                ? "Szerokość musi być prawidłową liczbą dodatnią"
-                : undefined
-            }
+            onChange={setWidth}
+            error="Szerokość musi być prawidłową liczbą dodatnią"
           />
           <button
             className="bg-blue-600 border border-blue-600 text-white px-4 py-2 font-semibold rounded-md w-full mt-2 disabled:opacity-60"
@@ -83,18 +62,11 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
         <AdornedInput
           label="Powierzchnia:"
           name="area"
-          type="number"
           adornmentContent="m²"
           classes={{ input: "mt-1 block w-full input", container: "w-full" }}
           value={area}
-          hideIcon
-          onChange={(e) => setArea(e.target.value)}
-          valid={isAreaValid}
-          error={
-            !isAreaValid && !area.match(numberRegex)
-              ? "Powierzchnia musi być prawidłową liczbą dodatnią"
-              : undefined
-          }
+          onChange={setArea}
+          error="Powierzchnia musi być prawidłową liczbą dodatnią"
         />
         <button
           className="bg-blue-600 border border-blue-600 text-white px-4 py-2 font-semibold rounded-md ml-4"

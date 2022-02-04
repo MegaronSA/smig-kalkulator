@@ -24,11 +24,7 @@ export const ShoppingListForm: React.FC<Props> = ({
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [packageType, setPackageType] = useState<number | undefined>();
-  const [pricePerPackage, setPricePerPackage] = useState<string>("");
-
-  const parsedPrice = _.toNumber(pricePerPackage.replace(",", "."));
-  const isPriceValid = !_.isNaN(parsedPrice) && parsedPrice > 0;
-  const allowed = /^0[.,]?$|^$/;
+  const [pricePerPackage, setPricePerPackage] = useState<number | undefined>();
 
   const getPackageTypeToPropose = () =>
     packageTypes.reduce<number>(
@@ -52,8 +48,8 @@ export const ShoppingListForm: React.FC<Props> = ({
   }, [result, packageType]);
 
   useEffect(() => {
-    if (!packagesToBuy || !isPriceValid) return setPriceSum(undefined);
-    setPriceSum(packagesToBuy * parsedPrice);
+    if (!packagesToBuy || !pricePerPackage) return setPriceSum(undefined);
+    setPriceSum(packagesToBuy * pricePerPackage);
   }, [packagesToBuy, pricePerPackage]);
 
   useEffect(() => {
@@ -75,12 +71,8 @@ export const ShoppingListForm: React.FC<Props> = ({
           adornmentContent="zł"
           classes={{ input: "mt-1 block w-full input" }}
           value={pricePerPackage}
-          onChange={(e) => setPricePerPackage(e.target.value)}
-          error={
-            !isPriceValid && !pricePerPackage.match(allowed)
-              ? "Cena musi być prawidłową liczbą dodatnią"
-              : undefined
-          }
+          onChange={setPricePerPackage}
+          error="Cena musi być prawidłową liczbą dodatnią"
         />
       </div>
     </section>
