@@ -1,13 +1,16 @@
 export const adhesives = Object.freeze({
-  "F-60": {
+  "ŚMIG F-60": {
     efficiencies: [1.9, 2.4, 3.7, 4.4, 5.3, 10.6],
     packSizes: [5, 15, 18],
   },
-  "F-2": { efficiencies: [1.9, 2.4, 3.7, 4.4, 5.3, 10.6], packSizes: [5, 15] },
-  "S-3": { efficiencies: [1.8, 2.4, 3, 3.6, 4.2, 8.4], packSizes: [25] },
-  "S-4": { efficiencies: [1.8, 2.4, 3, 3.6, 4.2, 8.4], packSizes: [20] },
-  "S-6": { efficiencies: [1.8, 2.4, 3, 3.6, 4.2, 8.5], packSizes: [20] },
-  "Dw-13": {
+  "ŚMIG F-2": {
+    efficiencies: [1.9, 2.4, 3.7, 4.4, 5.3, 10.6],
+    packSizes: [5, 15],
+  },
+  "ŚMIG S-3": { efficiencies: [1.8, 2.4, 3, 3.6, 4.2, 8.4], packSizes: [25] },
+  "ŚMIG S-4": { efficiencies: [1.8, 2.4, 3, 3.6, 4.2, 8.4], packSizes: [20] },
+  "ŚMIG S-6": { efficiencies: [1.8, 2.4, 3, 3.6, 4.2, 8.5], packSizes: [20] },
+  "ŚMIG Dw-13": {
     efficiencies: [1.9, 2.4, 3.7, 4.4, 5.3, 10.6],
     packSizes: [5, 15],
   },

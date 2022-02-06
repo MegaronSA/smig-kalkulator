@@ -1,17 +1,23 @@
 export const finishes = Object.freeze({
-  "A-2": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [1.5, 5, 20] },
-  "A-6": { efficiencies: [2.1, 1.05, 2.1, 0.42, 1.05, 0.525], packSizes: [10] },
-  "A-8": {
+  "ŚMIG A-2": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [1.5, 5, 20] },
+  "ŚMIG A-6": {
+    efficiencies: [2.1, 1.05, 2.1, 0.42, 1.05, 0.525],
+    packSizes: [10],
+  },
+  "ŚMIG A-8": {
     efficiencies: [2.1, 1.05, 2.1, 0.42, 1.05, 0.525],
     packSizes: [1, 1.5, 4],
   },
-  "A-11": {
+  "ŚMIG A-11": {
     efficiencies: [2.1, 1.05, 2.1, 0.42, 1.05, 0.525],
     packSizes: [17],
   },
-  "Dv-20": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [1.5, 5, 20] },
-  "Dv-21": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [17] },
-  "Df-16": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [20] },
+  "ŚMIG Dv-20": {
+    efficiencies: [2, 1, 2, 0.4, 1, 0.5],
+    packSizes: [1.5, 5, 20],
+  },
+  "ŚMIG Dv-21": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [17] },
+  "ŚMIG Df-16": { efficiencies: [2, 1, 2, 0.4, 1, 0.5], packSizes: [20] },
 });
 
 export const finishesNames = Object.freeze(Object.keys(finishes) as Finish[]);

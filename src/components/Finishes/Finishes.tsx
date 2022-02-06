@@ -33,7 +33,7 @@ export const Finishes: React.FC<Props> = () => {
   const [priceSum, setPriceSum] = useState<number>();
 
   return (
-    <div className="container mx-auto max-w-lg overflow-x-hidden">
+    <div className="container mx-auto max-w-lg h-full">
       <div className="px-8 pt-6 z-10 bg-white relative">
         <h5 className="font-semibold text-gray-400 text-sm">
           <span>1. Zużycie gładzi</span>

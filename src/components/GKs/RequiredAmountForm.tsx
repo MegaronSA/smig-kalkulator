@@ -1,6 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AreaCalculator } from "components/shared/AreaCalculator";
-import { AdornedInput, NativeSelect } from "components/shared/inputs";
+import {
+  AdornedInput,
+  NativeSelect,
+  VisualizedSelect,
+} from "components/shared/inputs";
 import {
   getGKEfficiency,
   GK,
@@ -45,7 +49,7 @@ export const RequiredAmountForm: React.FC<Props> = ({
   return (
     <section className="my-6 flex flex-col gap-6">
       <div>
-        <NativeSelect
+        <VisualizedSelect
           value={selectedProduct}
           onChange={setSelectedProduct}
           label="Produkt"
