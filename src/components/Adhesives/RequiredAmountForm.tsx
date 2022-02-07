@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AreaCalculator } from "components/shared/AreaCalculator";
-import { NativeSelect, VisualizedSelect } from "components/shared/inputs";
+import { productNameToImagePath } from 'components/shared'
+import { AreaCalculator } from 'components/shared/AreaCalculator'
+import { NativeSelect, VisualizedSelect } from 'components/shared/inputs'
 import {
   Adhesive,
   adhesivesNames,
@@ -9,14 +10,13 @@ import {
   tileSizes,
   TrowelSize,
   trowelSizes,
-} from "data/adhesives";
-import _ from "lodash";
-import React, { useEffect, useState } from "react";
+} from 'data/adhesives'
+import React, { useEffect, useState } from 'react'
 
 interface Props {
-  setResult: (result: number | undefined) => void;
-  selectedProduct: Adhesive | undefined;
-  setSelectedProduct: (product: Adhesive) => void;
+  setResult: (result: number | undefined) => void
+  selectedProduct: Adhesive | undefined
+  setSelectedProduct: (product: Adhesive) => void
 }
 
 export const RequiredAmountForm: React.FC<Props> = ({
@@ -24,16 +24,16 @@ export const RequiredAmountForm: React.FC<Props> = ({
   selectedProduct,
   setSelectedProduct,
 }) => {
-  const [area, setArea] = useState<number | undefined>();
-  const [trowelSize, setTrowelSize] = useState<TrowelSize>();
+  const [area, setArea] = useState<number | undefined>()
+  const [trowelSize, setTrowelSize] = useState<TrowelSize>()
 
   useEffect(() => {
-    const isValid = selectedProduct && area && trowelSize;
-    if (!isValid) return setResult(undefined);
-    const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize);
-    const result = area * efficiency;
-    setResult(result);
-  }, [selectedProduct, area, trowelSize]);
+    const isValid = selectedProduct && area && trowelSize
+    if (!isValid) return setResult(undefined)
+    const efficiency = getAdhesiveEfficiency(selectedProduct, trowelSize)
+    const result = area * efficiency
+    setResult(result)
+  }, [selectedProduct, area, trowelSize])
 
   return (
     <section className="my-6 flex flex-col gap-6">
@@ -45,6 +45,7 @@ export const RequiredAmountForm: React.FC<Props> = ({
           name="product"
           options={adhesivesNames}
           valid={Boolean(selectedProduct)}
+          getImageUrl={productNameToImagePath}
         />
       </div>
       <div>
@@ -79,15 +80,15 @@ export const RequiredAmountForm: React.FC<Props> = ({
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
 const tileSizeToTrowelSize = (tileSize: TileSize): TrowelSize => {
-  const tileIdx = tileSizes.indexOf(tileSize);
-  return trowelSizes[tileIdx];
-};
+  const tileIdx = tileSizes.indexOf(tileSize)
+  return trowelSizes[tileIdx]
+}
 
 const trowelSizeToTileSize = (trowelSize: TrowelSize): TileSize => {
-  const trowelIdx = trowelSizes.indexOf(trowelSize);
-  return tileSizes[trowelIdx];
-};
+  const trowelIdx = trowelSizes.indexOf(trowelSize)
+  return tileSizes[trowelIdx]
+}

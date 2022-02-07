@@ -1,31 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import _ from "lodash";
-import React, { useState } from "react";
-import { AdornedInput } from "./inputs";
-import { Dialog, useDialog } from "./styled/Dialog";
-import { numberRegex } from "./utils";
+import React, { useState } from 'react'
+import { AdornedInput } from './inputs'
+import { Dialog, useDialog } from './styled/Dialog'
 
 interface Props {
-  area: number | undefined;
-  setArea: (area: number | undefined) => void;
+  area: number | undefined
+  setArea: (area: number | undefined) => void
 }
 
 export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
-  const dialog = useDialog("powierzchnia");
+  const dialog = useDialog('powierzchnia')
 
-  const [height, setHeight] = useState<number | undefined>();
-  const [width, setWidth] = useState<number | undefined>();
+  const [height, setHeight] = useState<number | undefined>()
+  const [width, setWidth] = useState<number | undefined>()
 
-  const calculateAreaEnabled = height && width;
+  const calculateAreaEnabled = height && width
 
   const onCalculateArea = () => {
-    if (!calculateAreaEnabled) return setArea(undefined);
-    const calculatedArea = height * width;
-    dialog.close();
-    if (area !== calculatedArea) setArea(calculatedArea);
-    setHeight(undefined);
-    setWidth(undefined);
-  };
+    if (!calculateAreaEnabled) return setArea(undefined)
+    const calculatedArea = height * width
+    dialog.close()
+    if (area !== calculatedArea) setArea(calculatedArea)
+    setHeight(undefined)
+    setWidth(undefined)
+  }
 
   return (
     <div>
@@ -35,7 +33,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
             label="Długość:"
             name="height"
             adornmentContent="m"
-            classes={{ input: "mt-1 block input w-full" }}
+            classes={{ input: 'mt-1 block input w-full' }}
             value={height}
             onChange={setHeight}
             error="Długość musi być prawidłową liczbą dodatnią"
@@ -44,7 +42,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
             label="Szerokość:"
             name="width"
             adornmentContent="m"
-            classes={{ input: "mt-1 block input w-full" }}
+            classes={{ input: 'mt-1 block input w-full' }}
             value={width}
             onChange={setWidth}
             error="Szerokość musi być prawidłową liczbą dodatnią"
@@ -63,7 +61,7 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
           label="Powierzchnia:"
           name="area"
           adornmentContent="m²"
-          classes={{ input: "mt-1 block w-full input", container: "w-full" }}
+          classes={{ input: 'mt-1 block w-full input', container: 'w-full' }}
           value={area}
           onChange={setArea}
           error="Powierzchnia musi być prawidłową liczbą dodatnią"
@@ -76,5 +74,5 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
