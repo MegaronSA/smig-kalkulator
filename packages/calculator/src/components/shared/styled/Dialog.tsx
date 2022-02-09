@@ -1,28 +1,28 @@
-import React, { Fragment } from "react";
-import { Dialog as HeadlessUIDialog, Transition } from "@headlessui/react";
+import React, { Fragment } from 'react'
+import { Dialog as HeadlessUIDialog, Transition } from '@headlessui/react'
 import {
   useNavigate,
   useNavigationType,
   useSearchParams,
-} from "react-router-dom";
+} from 'react-router-dom'
 interface Props {
-  children: React.ReactNode;
-  className?: string;
-  name: string;
+  children: React.ReactNode
+  className?: string
+  name: string
 }
 
 export const Dialog: React.FC<Props> = ({ children, className, name }) => {
-  const navigate = useNavigate();
-  const type = useNavigationType();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate()
+  const type = useNavigationType()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const closeDialog = () => {
-    if (type === "PUSH") return navigate(-1);
-    const paramsToSet = searchParams;
-    paramsToSet.delete(name);
-    setSearchParams(paramsToSet, { replace: true });
-  };
-  const open = searchParams.get(name) !== null;
+    if (type === 'PUSH') return navigate(-1)
+    const paramsToSet = searchParams
+    paramsToSet.delete(name)
+    setSearchParams(paramsToSet, { replace: true })
+  }
+  const open = searchParams.get(name) !== null
 
   return (
     <Transition
@@ -58,23 +58,26 @@ export const Dialog: React.FC<Props> = ({ children, className, name }) => {
         </div>
       </HeadlessUIDialog>
     </Transition>
-  );
-};
+  )
+}
 
 export const useDialog = (name: string, value?: string) => {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const type = useNavigationType();
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const type = useNavigationType()
 
-  const open = () =>
-    setSearchParams({ ...searchParams, [name]: value ?? "true" });
+  const open = () => {
+    const paramsToSet = searchParams
+    paramsToSet.append(name, value ?? 'true')
+    setSearchParams(paramsToSet, { replace: true })
+  }
 
   const close = () => {
-    if (type === "PUSH") return navigate(-1);
-    const paramsToSet = searchParams;
-    paramsToSet.delete(name);
-    setSearchParams(paramsToSet, { replace: true });
-  };
+    if (type === 'PUSH') return navigate(-1)
+    const paramsToSet = searchParams
+    paramsToSet.delete(name)
+    setSearchParams(searchParams, { replace: true })
+  }
 
-  return { open, close, name };
-};
+  return { open, close, name }
+}

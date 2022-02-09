@@ -60,7 +60,6 @@ export const RequiredAmountForm: React.FC<Props> = ({
             name="trowelSize"
             options={trowelSizes}
             valid={Boolean(trowelSize)}
-            hideIcon
           />
         </div>
         <div className="py-3 px-1">

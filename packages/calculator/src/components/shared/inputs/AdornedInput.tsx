@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline'
 import _ from 'lodash'
 import React, { useEffect, useState } from 'react'
-import { AppearTransition } from '../styled'
 import { numberRegex } from '../utils'
 
 interface Props {
@@ -16,7 +14,6 @@ interface Props {
     input?: string
     container?: string
   }
-  showValidationIcon?: boolean
 }
 
 export const AdornedInput: React.FC<Props> = ({
@@ -27,7 +24,6 @@ export const AdornedInput: React.FC<Props> = ({
   label,
   name,
   error,
-  showValidationIcon,
 }) => {
   const [textValue, setTextValue] = useState<string>(
     value ? value.toString() : '',
@@ -74,14 +70,6 @@ export const AdornedInput: React.FC<Props> = ({
             {adornmentContent}
           </span>
         </div>
-        <AppearTransition
-          show={Boolean(isValid) && Boolean(showValidationIcon)}
-        >
-          <CheckCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-green-700" />
-        </AppearTransition>
-        <AppearTransition show={Boolean(error) && Boolean(showValidationIcon)}>
-          <XCircleIcon className="absolute w-6 top-2 -right-7 sm:-right-8 text-red-700" />
-        </AppearTransition>
       </div>
       {isError && <p className="text-sm mt-1 text-red-700">{error}</p>}
     </div>
