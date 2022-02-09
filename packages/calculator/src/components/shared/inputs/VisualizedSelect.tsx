@@ -115,7 +115,7 @@ export const VisualizedSelect = <T extends string>({
         {value && (
           <div
             onClick={dialog.open}
-            className=" w-20 h-20 rounded-md bg-cover bg-center border border-green-700 cursor-pointer"
+            className=" w-20 h-20 rounded-md bg-cover bg-center border border-green-700 cursor-pointer shadow-sm"
             style={{
               backgroundImage: `url(${getImageUrl(value)})`,
               minWidth: '85px',

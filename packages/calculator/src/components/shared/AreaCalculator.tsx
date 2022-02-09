@@ -67,7 +67,8 @@ export const AreaCalculator: React.FC<Props> = ({ area, setArea }) => {
           error="Powierzchnia musi być prawidłową liczbą dodatnią"
         />
         <button
-          className="bg-blue-600 border border-blue-600 text-white px-4 py-2 font-semibold rounded-md ml-4"
+          className="bg-blue-600 border border-blue-600 text-white px-4 py-2 font-semibold rounded-md ml-4 w-20"
+          style={{ minWidth: '85px' }}
           onClick={dialog.open}
         >
           Wylicz
